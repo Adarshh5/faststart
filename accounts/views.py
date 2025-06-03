@@ -26,31 +26,6 @@ load_dotenv()
 
 
 
-# def register(request):
-#     if request.method == 'POST':
-#        form = RegistrationForm(request.POST)
-#        if form.is_valid():
-#            user = form.save(commit=False)
-#            user.set_password(form.cleaned_data['password'])
-#            user.is_active = False
-#            user.save()
-
-#            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-#            token = default_token_generator.make_token(user)
-#            activation_link = reverse('activate', kwargs={'uidb64': uidb64, 'token': token})
-#            activation_url = f'{settings.SITE_DOMAIN}{activation_link}'
-#            send_activation_email(user.email, activation_url)
-
-#            messages.success(
-#                request, "Registration Susseful! Please check your email to activate your account. ",
-#            )
-#            return redirect('login')
-       
-
-#     else:
-#         form = RegistrationForm()
-#     return render(request, 'accounts/registration.html', {'form': form})
-
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

@@ -128,43 +128,6 @@ class WordDetail(View):
 
 
 
-@login_required
-def checkvalidation(request):
-    user = request.user
-    try:
-        grammarobj = SavedGrammar.objects.filter(user=user).first()
-        if not grammarobj:
-            grammarobj = SavedGrammar(user=user)
-            grammarobj.save()
-    except Exception as e:
-        return HttpResponse(f"Manually created grammar object failed: {e}")
-
-
-    vocabularyobj,_ = SavedVocabulary.objects.get_or_create(user=user)
-    start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
-    days_used = (timezone.now().date() - start_record.start_date).days
-
-    if days_used >= 10:
-        messages.info(request, "Your free tier has expired.")
-        return redirect('home')
-
-    today = localtime(timezone.now()).date()
-    
-    story_usage, _ = UserDailyStoryUsage.objects.get_or_create(user=user, date=today)
-    if story_usage.count >= 2:
-        print("under")
-        messages.info(request, "You’ve reached today’s story generation limit.")
-        return redirect('home')
-    print("outer")
-    if not (grammarobj.simple_sentence or grammarobj.tense or grammarobj.modal_part_1 or grammarobj.modal_part_2):
-        messages.info(request, 'You have to complete at least Simple Sentences, Tense, or Modals to generate text.')
-        return redirect('home')
-
-    if len(vocabularyobj.words) < 20:
-        messages.info(request, 'You have to add at least 20 words to generate text content.')
-        return redirect('home')
-
-    return redirect('textgeneration')
 
 
 @login_required

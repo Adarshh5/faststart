@@ -15,7 +15,7 @@
                     <span class="badge bg-secondary">{{ word.part_of_speech }}</span>
                 </div>
                 {% if user.is_authenticated %}
-                    <button id="saveWordBtn" class="btn btn-toggle-save" data-word="{{ word.word_name }}">
+                    <button id="saveWordBtn" class="btn btn-toggle-save" data-word="{{ word.word_name }}" data-saved="{% if word_added %}true{% else %}false{% endif %}">
                         {% if word_added %}
                             <i class="fas fa-bookmark"></i> Saved
                         {% else %}
@@ -117,22 +117,7 @@
                         </div>
                     </div>
                 </div>
-                 <!-- Item 4
-                <div class="accordion-item">
-                    <h5 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" 
-                            data-bs-toggle="collapse" data-bs-target="#tipfour">
-                            How to remember difficult words?
-                        </button>
-                    </h5>
-                    <div id="tipfour" class="accordion-collapse collapse" 
-                        data-bs-parent="#wordTipsAccordion">
-                        <div class="accordion-body">
-                            Use the word in sentences throughout your day. Create mental images associated with the word. 
-                            Connect it to words you already know. Review it several times over a week.
-                        </div>
-                    </div>
-                </div> -->
+               
             </div>
         </div>
     </div>
@@ -141,6 +126,6 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'core/js/word_detail.js/' %}"></script>
+<script src="{% static 'core/js/word_detail.js' %}"></script>
 
 {% endblock %}

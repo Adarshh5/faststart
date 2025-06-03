@@ -1,41 +1,55 @@
 
-
-{% extends 'core/base.html' %}
+<!DOCTYPE html>
 {% load static %}
-
-{% block extra_css %}
-<link href="{% static 'ai_assistant/css/chatbot.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block content %}
-<section class="chatbot-section">
-    <div class="container-fluid h-100 p-0">
-        <div class="chat-container d-flex flex-column h-100">
-            <!-- Chat Header -->
-            <div class="chat-header py-3">
-                <div class="d-flex align-items-center justify-content-between">
-                    <h3 class="chat-title mb-0">AI Assistant</h3>
-                    <div class="usage-indicator">
-                        <i class="fas fa-comment me-2"></i>
-                        <span id="messageCount">0/8</span>
-                    </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>faststart - AI Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'ai_assistant/css/chatbot.css' %}">
+    
+ 
+</head>
+<body class="theme-dark">
+    <div class="chat-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="d-flex align-items-center justify-content-between">
+                <h3 class="chat-title">AI Assistant</a></h3>
+                <div class="usage-indicator">
+                    <i class="fas fa-comment me-2"></i>
+                    <span id="messageCount">0/20</span>
                 </div>
             </div>
+        </div>
 
-            <!-- Chat Messages -->
-            <div id="chatBox" class="chat-box flex-grow-1">
-                {% for msg in chat_history %}
-                <div class="message {{ msg.type }}">
-                    {{ msg.content }}
-                    {% if msg.translation and msg.type == 'ai' %}
-                    <div class="translation">{{ msg.translation }}</div>
-                    {% endif %}
-                </div>
-                {% endfor %}
+        <!-- Chat Messages -->
+        <div id="chatBox" class="chat-box">
+            {% for msg in chat_history %}
+            <div class="message {{ msg.type }}">
+                {{ msg.content }}
+                {% if msg.translation and msg.type == 'ai' %}
+                <div class="translation">{{ msg.translation }}</div>
+                {% endif %}
             </div>
+            {% endfor %}
+            
+            <!-- Typing Indicator -->
+            <div id="typingIndicator" class="typing-indicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="ms-2">AI is typing...</span>
+            </div>
+        </div>
 
-            <!-- Input Area -->
-            <form id="chatForm" class="chat-input" data-url="{% url 'Chatbot' %}">
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <form id="chatForm" data-url="{% url 'Chatbot' %}">
                 {% csrf_token %}
                 <div class="input-group">
                     <input type="text" id="userInput" name="user_message" 
@@ -52,9 +66,9 @@
             </form>
         </div>
     </div>
-</section>
-{% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'ai_assistant/js/chatbot.js' %}"></script>
-{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'ai_assistant/js/chatbot.js' %}"></script>
+    
+</body>
+</html>

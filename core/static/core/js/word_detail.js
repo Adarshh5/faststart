@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (saveWordBtn) {
         saveWordBtn.addEventListener('click', function() {
             const word = this.getAttribute('data-word');
-            const isSaved = this.innerHTML.includes('fa-bookmark'); // Check if already saved
+            // const isSaved = this.innerHTML.includes('fa-bookmark'); // Check if already saved
+            let isSaved = this.getAttribute('data-saved') === 'true';
             
             // Get CSRF token from cookies
             function getCookie(name) {
@@ -38,22 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ word: word })
             })
             .then(response => response.json())
+           
             .then(data => {
-                if (data.reply === "success") {
-                    // Toggle button state
-                    if (isSaved) {
-                        saveWordBtn.innerHTML = '<i class="far fa-bookmark"></i> Save';
-                    } else {
-                        saveWordBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
-                    }
-                    
-                    // Show success message
-                    showAlert('Word ' + (isSaved ? 'removed from' : 'added to') + ' your vocabulary!', 'success');
+                if (data.reply === "added") {
+                    saveWordBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+                    saveWordBtn.setAttribute('data-saved', 'true');
+                    showAlert('Word added to your vocabulary!', 'success');
+                } else if (data.reply === "already_saved") {
+                    saveWordBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+                    saveWordBtn.setAttribute('data-saved', 'true');
+                    showAlert('This word is already in your vocabulary.', 'info');
                 } else {
+                    // Unrecognized or error response
                     showAlert(data.reply || 'An error occurred', 'error');
                     saveWordBtn.innerHTML = originalHTML;
                 }
             })
+
+
             .catch(error => {
                 showAlert('Network error. Please try again.', 'error');
                 saveWordBtn.innerHTML = originalHTML;
@@ -89,3 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
+
+
+

@@ -35,7 +35,6 @@ def savegrammar(request):
 
     return redirect('grammar')
 
-
 @login_required
 def saveword(request):
     if request.method == "POST":
@@ -44,25 +43,22 @@ def saveword(request):
             data = json.loads(request.body)
             word = data.get('word')
 
-            if not word or word is None:
-                return JsonResponse({"reply": "Invalid word provided."}, status=400)
-            saved_vocab, _ = SavedVocabulary.objects.get_or_create(user=user)
-            if not isinstance(word, str) or not word.strip():
-                return JsonResponse({"reply": "Invalid word type."}, status=400)
+            if not word or not isinstance(word, str) or not word.strip():
+                return JsonResponse({"reply": "Invalid word."}, status=400)
 
+            saved_vocab, _ = SavedVocabulary.objects.get_or_create(user=user)
 
             if word in saved_vocab.words:
-                return JsonResponse({"reply": "word is already saved"})
+                return JsonResponse({"reply": "already_saved"})  # changed
             else:
                 saved_vocab.words.insert(0, word)
                 saved_vocab.save()
-                return JsonResponse({"reply": "success"})
+                return JsonResponse({"reply": "added"})  # changed
         except json.JSONDecodeError:
             return JsonResponse({"reply": "Invalid request format."}, status=400)
 
     return JsonResponse({"reply": "Invalid request method."}, status=405)
 
-           
 
 
 @login_required
