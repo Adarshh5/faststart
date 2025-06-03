@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a192f;
+            --secondary-bg: #172a45;
+            --accent-color: #64ffda;
+            --text-light: #ccd6f6;
+            --text-secondary: #8892b0;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .email-container {
+            background: var(--secondary-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 10px;
+            padding: 2.5rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .btn-success {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #1f2833;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background-color: #4bcca3;
+            border-color: #4bcca3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        hr {
+            border-color: rgba(100, 255, 218, 0.1);
+            margin: 2rem 0;
+        }
+
+        .text-muted {
+            color: var(--text-secondary) !important;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .email-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .btn-success {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .email-container {
+                padding: 1rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="email-container">
+            <h3>Activate Your Account</h3>
+            <p>Thank you for signing up! To activate your account, please click the button below:</p>
+            <a href="{{ activation_url }}" class="btn btn-success btn-lg">Activate Account</a>
+            <p class="mt-4">If you didn’t register with us, you can safely ignore this email.</p>
+            <hr>
+            <p class="text-muted">This is an automated message - please do not reply directly to this email</p>
+        </div>
+    </div>
+</body>
+</html>

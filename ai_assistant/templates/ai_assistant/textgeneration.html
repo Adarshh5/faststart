@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'ai_assistant/css/textgeneration.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="content-generation">
+    <div class="container">
+        <!-- Form Section -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form method="POST" class="generation-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-section mb-5">
+                        <h3 class="form-section-title mb-4">Content Preferences</h3>
+                        
+                        {% for field in form1 %}
+                        <div class="form-group mb-4">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ field.errors.as_text }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit" class="btn btn-submit w-100">
+                        <i class="fas fa-magic me-2"></i>Generate Content
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Accordion Section -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="faq-accordion">
+                    <h4 class="accordion-title mb-4">Frequently Asked Questions</h4>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Item 1 -->
+                        <div class="accordion-item">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#faqOne">
+                                    How is grammar added or used in this system or process?
+                                </button>
+                            </h5>
+                            <div id="faqOne" class="accordion-collapse collapse" 
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The AI will mostly use the grammar rules you have already learned in its responses. This makes it easier for you to understand the content and see how the grammar you've learned is used in real conversations.
+
+To make this happen, simply select "Include learned grammar" in the grammar options box. This helps the AI generate content using grammar you are familiar with.<br><br>AI अपने जवाबों में ज़्यादातर उन व्याकरण नियमों का इस्तेमाल करेगा जो आपने पहले ही सीख लिए हैं। इससे आपके लिए सामग्री को समझना और यह देखना आसान हो जाता है कि आपने जो व्याकरण सीखा है उसका वास्तविक बातचीत में कैसे इस्तेमाल किया जाता है।
+
+ऐसा करने के लिए, व्याकरण विकल्प बॉक्स में बस "सीखा हुआ व्याकरण शामिल करें" चुनें। इससे AI को आपके परिचित व्याकरण का इस्तेमाल करके सामग्री बनाने में मदद मिलती है।
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="accordion-item">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                                     Why should we listen to or read AI-generated content?
+                                </button>
+                            </h5>
+                            <div id="faqTwo" class="accordion-collapse collapse" 
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Listening to or reading AI-generated content helps make learning English more fun and less boring. English speaking is a long process, and sometimes it can feel less interesting than other subjects.
+
+With AI, you don’t need to repeat the same vocabulary or grammar rules again and again. Just learn them once or twice, and the AI will keep using them in your daily practice. This saves you time and helps you remember everything easily. Over time, you’ll start using the same sentences and words naturally in your daily life—just by seeing and hearing them often.<br><br>AI द्वारा जनरेटेड कंटेंट को सुनना या पढ़ना अंग्रेजी सीखने को अधिक मज़ेदार और कम उबाऊ बनाने में मदद करता है। अंग्रेजी बोलना एक लंबी प्रक्रिया है, और कभी-कभी यह अन्य विषयों की तुलना में कम दिलचस्प लग सकता है।
+
+AI के साथ, आपको बार-बार एक ही शब्दावली या व्याकरण के नियमों को दोहराने की ज़रूरत नहीं है। बस उन्हें एक या दो बार सीखें, और AI उन्हें आपके दैनिक अभ्यास में उपयोग करता रहेगा। इससे आपका समय बचता है और आपको सब कुछ आसानी से याद रखने में मदद मिलती है। समय के साथ, आप अपने दैनिक जीवन में स्वाभाविक रूप से उन्हीं वाक्यों और शब्दों का उपयोग करना शुरू कर देंगे - बस उन्हें अक्सर देखकर और सुनकर।
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="accordion-item">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#faqthree">
+                                     How can I generate very different story content each time?
+                                </button>
+                            </h5>
+                            <div id="faqthree" class="accordion-collapse collapse" 
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To create unique stories, use a long and detailed prompt for the AI. Include some special elements in your prompt—like Twist Ending, Moral Lesson, Emotional Journey, or Humorous Style—but don’t use all of them at once. Mixing different elements helps the AI create fresh and varied stories every time.<br><br>अनोखी कहानियाँ बनाने के लिए, AI के लिए एक लंबा और विस्तृत प्रॉम्प्ट इस्तेमाल करें। अपने प्रॉम्प्ट में कुछ खास तत्व शामिल करें—जैसे ट्विस्ट एंडिंग, नैतिक पाठ, भावनात्मक यात्रा, या हास्य शैली—लेकिन उन सभी का एक साथ इस्तेमाल न करें। अलग-अलग तत्वों को मिलाने से AI को हर बार नई और अलग-अलग कहानियाँ बनाने में मदद मिलती है।
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

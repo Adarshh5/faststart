@@ -1,0 +1,23 @@
+.ck-editor__editable {
+    color: #000000 !important; /* black text */
+    background-color: #ffffff !important; /* white background */
+}
+
+
+
+.ck-editor__editable h1,
+.ck-editor__editable h2,
+.ck-editor__editable h3 {
+    font-weight: bold;
+    color: #000;
+}
+
+.ck-editor__editable ul,
+.ck-editor__editable ol {
+    margin-left: 20px;
+}
+
+.ck-editor__editable strong {
+    font-weight: bold;
+    color: #000;
+}

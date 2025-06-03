@@ -1,0 +1,159 @@
+
+
+
+
+
+
+
+
+
+
+
+
+/* Vocabulary Section */
+.vocabulary-section {
+    padding: 2rem 0;
+    color: var(--text-primary);
+}
+
+.vocab-search {
+    margin-bottom: 2rem;
+}
+
+.vocab-filter-form {
+    max-width: 400px;
+    margin: 0 auto 1rem;
+}
+
+.input-group {
+    display: flex;
+}
+
+.input-group input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--indigo-dye);
+    color: var(--text-primary);
+    border-radius: 8px 0 0 8px;
+    padding: 0.75rem 1rem;
+    flex-grow: 1;
+    border-right: none;
+}
+
+.btn-search {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-primary);
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 0 1.25rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn-search:hover {
+    opacity: 0.9;
+}
+
+.search-info {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Vocabulary List */
+.vocab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.vocab-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(58, 80, 107, 0.5);
+}
+
+.item-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.word-number {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.word-title {
+    color: var(--mint-green);
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.word-meaning {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.word-definition {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.btn-detail {
+    color: var(--mint-green);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-detail:hover {
+    color: var(--aquamarine);
+    transform: translateX(5px);
+}
+
+.vocab-empty {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--text-secondary);
+}
+
+.vocab-empty i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--aquamarine);
+}
+
+.form-error {
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .vocabulary-section {
+        padding: 1.5rem 0;
+    }
+    
+    .vocab-item {
+        padding-bottom: 1.25rem;
+    }
+    
+    .item-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .word-title {
+        font-size: 1.25rem;
+    }
+    
+    .vocab-filter-form {
+        max-width: 100%;
+    }
+}

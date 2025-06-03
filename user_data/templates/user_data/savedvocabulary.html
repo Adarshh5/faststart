@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'user_data/css/savedvocabulary.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="saved-vocabulary">
+    <div class="container">
+        <div class="vocab-header">
+            <h2>Your Saved Vocabulary</h2>
+            <div class="vocab-count">
+                <i class="fas fa-book me-2"></i>
+                <span id="totalWords">{{ totalwords }}</span> words
+            </div>
+        </div>
+
+        <div class="vocab-list">
+            {% for word in VocabularyList %}
+            <div class="vocab-item" data-word="{{ word }}">
+                <div class="item-number">{{ forloop.counter }}.</div>
+                <div class="item-word">{{ word }}</div>
+                <div class="item-actions">
+                    <button class="btn-detail" title="View details">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <button class="btn-delete" title="Delete word">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            {% empty %}
+            <div class="vocab-empty">
+                <i class="fas fa-book-open me-2"></i>
+                No words saved yet
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'user_data/js/savedvocabulary.js' %}"></script>
+{% endblock %}

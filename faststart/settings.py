@@ -13,7 +13,7 @@ import os
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY =os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -27,7 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account'
+    'accounts',
+    'core',
+    "django_ckeditor_5",
+    'user_data',
+    'ai_assistant',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +78,17 @@ DATABASES = {
         "PORT": os.getenv("port"),  # Database port (default is 5432)
     }
 }
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST =os.getenv("email_host")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER =os.getenv("email_host_user")
+EMAIL_HOST_PASSWORD=os.getenv("email_host_password")  # double check it
+DEFAULT_FROM_EMAIL =os.getenv("default_from_email")
+
+
+SITE_DOMAIN = 'https://faststart.in'
+SITE_NAME = 'faststart'
 
 
 
@@ -101,12 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
 
 USE_TZ = True
+TIME_ZONE = 'Asia/Kolkata'
 
+
+USE_I18N = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -120,3 +135,89 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'accounts.User'
+
+
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
+
+
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading", "|",
+            "bold", "italic", "underline", "strikethrough", "highlight", "fontColor", "fontBackgroundColor", "|",
+            "link", "blockQuote", "code", "codeBlock", "subscript", "superscript", "|",
+            "bulletedList", "numberedList", "todoList", "|",
+            "outdent", "indent", "alignment", "|",
+            "imageUpload", "insertImage", "mediaEmbed", "insertTable", "|",
+            "htmlEmbed", "sourceEditing", "|",
+            "undo", "redo", "removeFormat", "horizontalLine"
+        ],
+        "language": "en",
+    }
+}
+
+
+
+DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')
+
+if DJANGO_ENV == 'development':
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '{levelname} {asctime} {name} {message}',
+                'style': '{',
+            },
+        },
+        'handlers': {
+            'file': {
+                'level': 'ERROR',
+                'class': 'logging.FileHandler',
+                'filename': os.path.join(BASE_DIR, 'errors.log'),
+                'formatter': 'verbose',
+            },
+            'console': {
+                'level': 'ERROR',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file', 'console'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        },
+    }
+
+else:  # production
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '{levelname} {asctime} {name} {message}',
+                'style': '{',
+            },
+        },
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
+                'level': 'ERROR',
+            },
+            # You can add 'mail_admins' here later
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        },
+    }

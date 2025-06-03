@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'core/css/vocabulary.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="vocabulary-section">
+    <div class="container">
+        <!-- Search Form -->
+        <div class="vocab-search">
+            <form method="GET" class="vocab-filter-form">
+                <div class="input-group">
+                    {{ form.number }}
+                    <button type="submit" class="btn-search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                {% if form.errors %}
+                <div class="form-error">
+                    {{ form.number.errors.as_text }}
+                </div>
+                {% endif %}
+            </form>
+            <div class="search-info">
+                Showing words {% if number %}#{{ number }} to #{{ number|add:99 }}{% else %}1 to 100{% endif %}
+            </div>
+        </div>
+
+        <!-- Vocabulary List -->
+        <div class="vocab-list">
+            {% if vocabulary_list %}
+                {% for word in vocabulary_list %}
+                <div class="vocab-item">
+                    <div class="item-header">
+                        <span class="word-number">#{{ word.word_number }}</span>
+                        <h3 class="word-title">{{ word.word_name }}</h3>
+                    </div>
+                    <div class="item-body">
+                        <p class="word-meaning">{{ word.hindi_meaning }}</p>
+                        <p class="word-definition">{{ word.definition|truncatewords:20 }}</p>
+                    </div>
+                    <a href="{% url 'word_detail' word.id %}" class="btn-detail">
+                        Full Information <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="vocab-empty">
+                    <i class="fas fa-book-open"></i>
+                    <p>No words found for this range</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'core/css/grammartopics.css' %}" rel="stylesheet">
+
+<section class="grammar-topics-section">
+    <div class="container">
+        {% for part in grammartopicpart %}
+        <div class="grammar-topic-card">
+            <h2 class="topic-title">{{ part.title }}</h2>
+            
+            <div class="main-content">
+                {{ part.main_content|safe }}
+            </div>
+
+            {% if part.guidetion %}
+            <div class="guidelines">
+                <h4>Learning Guidelines:</h4>
+                <div class="guideline-content">
+                    {{ part.guidetion|linebreaks }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        {% if user.is_authenticated %}
+        <div class="completion-section">
+            {% if data == "already added" %}
+            <div class="status-badge">
+                <i class="fas fa-check-circle"></i> Already Completed
+            </div>
+            {% else %}
+            <form method="POST" action="{% url 'savegrammar' %}" class="completion-form">
+                {% csrf_token %}
+                <input type="hidden" name="topic" value="{{ request.GET.topic }}">
+                <button type="submit" class="btn btn-complete">
+                    <i class="fas fa-bookmark"></i> Mark as Completed
+                </button>
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

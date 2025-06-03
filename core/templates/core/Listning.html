@@ -1,0 +1,186 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'core/css/Listning.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="listening-section">
+    <div class="container">
+        <!-- Introduction -->
+        <div class="intro-card mb-5">
+            <h1 class="section-title mb-4">English Listening Guide</h1>
+            <div class="language-mix">
+                <p class="english-text">
+                    Watch English content based on your level. Start with simple stories or conversations in 2D animated videos to understand easily.
+                </p>
+                <p class="hindi-text">
+                    अपने स्तर के आधार पर अंग्रेजी सामग्री देखें। आसानी से समझने के लिए 2D एनिमेटेड वीडियो में सरल कहानियों या वार्तालापों से शुरुआत करें।
+                </p>
+                <p class="english-text">
+                    Then move to native English speakers who speak clearly with actions/images. After that, try podcasts in domains you know, then more advanced conversations, and finally movies.
+                </p>
+                <p class="hindi-text">
+                    फिर उन मूल अंग्रेजी बोलने वालों की ओर बढ़ें जो कार्यों/छवियों के साथ स्पष्ट बोलते हैं। उसके बाद, उन क्षेत्रों में पॉडकास्ट आज़माएँ जिन्हें आप जानते हैं, फिर अधिक उन्नत वार्तालाप, और अंततः फिल्में।
+                </p>
+                <div class="note-box">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong>Note:</strong> Don't directly jump into watching movies, especially action movies where voices are fast. 
+                    Try movies where characters speak at normal pace.
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 1 -->
+        <div class="level-card mb-5">
+            <h2 class="level-title">
+                <i class="fas fa-1 me-2"></i>Level 1 - Beginner
+            </h2>
+            <div class="level-content">
+                <div class="language-mix">
+                    <p class="english-text">
+                        Simple stories and conversations in 2D animated videos:
+                    </p>
+                    <p class="hindi-text">
+                        सरल कहानियाँ और 2D एनिमेटेड वीडियो में वार्तालाप:
+                    </p>
+                </div>
+                <ul class="resource-list">
+                    <li><a href="https://youtube.com/@englishspeakingcourses?si=0InaIbNFxSq54Nb6" target="_blank">Link 1 - Simple English Conversations</a></li>
+                    <li><a href="https://youtube.com/@newstoriesbookenglish?si=RRNk-_PlXv3kNEHj" target="_blank">Link 2 - Animated Stories for Beginners</a></li>
+                </ul>
+                
+                <div class="language-mix mt-4">
+                    <p class="english-text">
+                        Native English speakers who speak clearly with pictures/actions:
+                    </p>
+                    <p class="hindi-text">
+                        मूल अंग्रेजी बोलने वाले जो चित्रों/कार्यों के साथ स्पष्ट बोलते हैं:
+                    </p>
+                </div>
+                <ul class="resource-list">
+                    <li><a href="https://youtube.com/@learnenglishwithbobthecanadian?si=clgSGih5YDUs27Xc" target="_blank">Link 1 - Clear Pronunciation Channel</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="level-card mb-5">
+            <h2 class="level-title">
+                <i class="fas fa-2 me-2"></i>Level 2 - Intermediate
+            </h2>
+            <div class="level-content">
+                <div class="language-mix">
+                    <p class="english-text">
+                        Watch podcasts and native English speaker videos:
+                    </p>
+                    <p class="hindi-text">
+                        पॉडकास्ट और मूल अंग्रेजी बोलने वाले वीडियो देखें:
+                    </p>
+                </div>
+                <ul class="resource-list">
+                    <li><a href="https://youtube.com/@nikhil.kamath?si=O7N5CK7Ef2kQ1cmc" target="_blank">Link 1 - Daily English Podcast</a></li>
+                    <li><a href="https://youtube.com/@speakenglishwithvanessa?si=x3JW9BbCVq0zb6S0" target="_blank">Link 2 - Native Speaker Conversations</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="level-card mb-5">
+            <h2 class="level-title">
+                <i class="fas fa-3 me-2"></i>Level 3 - Advanced
+            </h2>
+            <div class="level-content">
+                <div class="language-mix">
+                    <p class="english-text">
+                        Watch English movies along with podcasts and native speaker content:
+                    </p>
+                    <p class="hindi-text">
+                        पॉडकास्ट और मूल वक्ता सामग्री के साथ अंग्रेजी फिल्में देखें:
+                    </p>
+                </div>
+                <ul class="resource-list">
+                    <li><a href="https://youtu.be/k7tijaEzqTI?si=b3UtQRBQv0gaXr6j" target="_blank">Link 1 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/fbv0RCpJ2G8?si=Lk0LrqbhdsHUbSJ3" target="_blank">Link 2 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/qBczncM0ntk?si=xUzg3IpSVjPwFqQN" target="_blank">Link 3 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/1PeeqUVI7hw?si=O1CqEK0f-j5j-_ty" target="_blank">Link 4 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/PMeHdc25BGE?si=RMoZ9BK33kdEZZ01" target="_blank">Link 5 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/vEMId4GUEVQ?si=xSVcgj_R3uIb9zsP" target="_blank">Link 6 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/33NHSMQEMB4?si=iVPevUema63o4TQB" target="_blank">Link 7 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/KaUcFaI3njA?si=xDYMR_6DYCw1iCZN" target="_blank">Link 8 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/3fceYbqtoZ0?si=y9WNxCDutV2yPKkg" target="_blank">Link 9 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/Rc6WrbiJwUM?si=34Eu7Nye44yIYZC0" target="_blank">Link 10 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/Rc6WrbiJwUM?si=34Eu7Nye44yIYZC0" target="_blank">Link 11 - Movies with Clear Dialogue</a></li>
+                    <li><a href="https://youtu.be/Rc6WrbiJwUM?si=34Eu7Nye44yIYZC0" target="_blank">Link 12 - Movies with Clear Dialogue</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-section">
+            <h2 class="section-title mb-4">Common Questions</h2>
+            
+            <div class="accordion" id="faqAccordion">
+                <!-- Question 1 -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#faqOne">
+                            <span class="english-text">When will we start understanding English?</span>
+                            <span class="hindi-text">हम अंग्रेजी कब समझना शुरू करेंगे?</span>
+                        </button>
+                    </h3>
+                    <div id="faqOne" class="accordion-collapse collapse" 
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <div class="language-mix">
+                                <p class="english-text">
+                                    It depends on how much time you give every day and your current level. 
+                                    If you're a beginner and spend 20-30 minutes daily, you can understand 
+                                    simple conversations in 1-2 months using subtitles. Combine this with 
+                                    basic grammar practice (5-10 days), vocabulary building, and speaking practice.
+                                </p>
+                                <p class="hindi-text">
+                                    यह इस बात पर निर्भर करता है कि आप रोजाना कितना समय देते हैं और आपका वर्तमान स्तर क्या है।
+                                    यदि आप शुरुआत कर रहे हैं और प्रतिदिन 20-30 मिनट व्यतीत करते हैं, तो आप उपशीर्षक का उपयोग करके
+                                    1-2 महीने में सरल वार्तालाप समझ सकते हैं। इसे बुनियादी व्याकरण अभ्यास (5-10 दिन), शब्दावली निर्माण
+                                    और बोलने के अभ्यास के साथ जोड़ें।
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                            <span class="english-text">Can we start directly watching English movies or advanced conversations?</span>
+                            <span class="hindi-text">क्या हम सीधे अंग्रेजी फिल्में या उन्नत वार्तालाप देखना शुरू कर सकते हैं?</span>
+                        </button>
+                    </h3>
+                    <div id="faqTwo" class="accordion-collapse collapse" 
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <div class="language-mix">
+                                <p class="english-text">
+                                    It depends on your level, but we recommend starting with Level 1 listening material. 
+                                    This helps you understand easily and stay motivated. Starting with content that matches 
+                                    your level prevents boredom and builds confidence gradually.
+                                </p>
+                                <p class="hindi-text">
+                                    यह आपके स्तर पर निर्भर करता है, लेकिन हम स्तर 1 की सुनने की सामग्री से शुरुआत करने की सलाह देते हैं।
+                                    यह आपको आसानी से समझने और प्रेरित रहने में मदद करता है। अपने स्तर से मेल खाने वाली सामग्री से शुरुआत करने से
+                                    ऊबॅन होने से बचाता है और आत्मविश्वास धीरे-धीरे बनाता है।
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

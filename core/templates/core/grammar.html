@@ -1,0 +1,89 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'core/css/grammar.css' %}" rel="stylesheet">
+
+<section class="grammar-section">
+    <div class="container">
+        <h2 class="grammar-heading">Essential Grammar Concepts</h2>
+        
+        <div class="grammar-grid">
+            <!-- Simple Sentence -->
+          
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="simple_sentence">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <h3>Simple Sentence Structure</h3>
+                </button>
+            </form>
+
+            <!-- Tense -->
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="tense">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Tense Mastery</h3>
+                </button>
+            </form>
+
+            <!-- Modal Verbs -->
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="modal_part_1">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Modal Verbs Part 1</h3>
+                </button>
+            </form>
+             <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="modal_part_2">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Modal Verbs Part 2</h3>
+                </button>
+            </form>
+
+            <!-- Causative Verb -->
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="causative_verb">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Causative Verbs</h3>
+                </button>
+            </form>
+
+            <!-- Voice -->
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="voice">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <h3>Active & Passive Voice</h3>
+                </button>
+            </form>
+            <form method="GET" action="{% url 'grammar-topics' %}" class="grammar-item">
+                <input type="hidden" name="topic" value="other">
+                <button type="submit" class="grammar-card">
+                    <div class="grammar-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <h3>Others Grammar concept</h3>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

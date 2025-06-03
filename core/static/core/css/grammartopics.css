@@ -1,0 +1,90 @@
+/* Grammar Topics Page */
+.grammar-topics-section {
+    padding: 2rem 0;
+}
+
+.grammar-topic-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.topic-title {
+    color: var(--mint-green);
+    border-bottom: 2px solid var(--aquamarine);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.main-content {
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.main-content p {
+    margin-bottom: 1.2rem;
+}
+
+.guidelines {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--aquamarine);
+    padding: 1rem;
+    margin-top: 1.5rem;
+}
+
+.guidelines h4 {
+    color: var(--mint-green);
+    margin-bottom: 0.8rem;
+}
+
+.guideline-content {
+    color: var(--text-secondary);
+}
+
+.completion-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-complete {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-primary) !important;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-complete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(142, 45, 226, 0.3);
+}
+
+.status-badge {
+    color: var(--mint-green);
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--mint-green);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grammar-topic-card {
+        padding: 1rem;
+    }
+    
+    .topic-title {
+        font-size: 1.3rem;
+    }
+    
+    .btn-complete {
+        width: 100%;
+        padding: 1rem;
+    }
+}

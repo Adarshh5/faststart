@@ -1,0 +1,163 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'core/css/home.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<!-- SEO Section -->
+<section class="seo-section">
+    <div class="container">
+        <h1 class="seo-title">Learn English Speaking Online - AI-Powered Speaking Practice, Grammar Lessons & Vocabulary Building</h1>
+        <p class="seo-subtitle">Your personal AI coach for mastering English. Practice daily with guided help, smart feedback, and practical conversation.</p>
+    </div>
+</section>
+
+
+
+<!-- Topics Section -->
+<section class="topics-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Explore Learning Topics</h2>
+            <p class="section-subtitle">Interactive modules designed for effective skill building</p>
+        </div>
+
+        <div class="topics-grid">
+            <!-- Grammar -->
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">Spoken Grammar</h3>
+                    <p class="topic-description">Learn important English grammar for speaking with easy explanations.</p>
+                </div>
+                <a href="{% url 'grammar' %}" class="btn btn-topic">Start Learning</a>
+            </div>
+
+            <!-- Vocabulary -->
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">Vocabulary Builder</h3>
+                    <p class="topic-description">Expand your word power by learning spoken English vocabulary.</p>
+                </div>
+                <a href="{% url 'vocabulary' %}" class="btn btn-topic">Start Learning</a>
+            </div>
+            
+            <!-- Reading -->
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">AI Reading Assistant</h3>
+                    <p class="topic-description">Improve reading skills with AI-generated comprehension exercises.</p>
+                </div>
+                <a href="{% url 'textgeneration' %}" class="btn btn-topic">Start Reading</a>
+            </div>
+
+            <!-- Listening -->
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">Listening Resources</h3>
+                    <p class="topic-description">Be ready to understand any kind of English conversation.</p>
+                </div>
+                <a href="{% url 'Listning' %}" class="btn btn-topic">Start Learning</a>
+            </div>
+
+            <!-- Speaking -->
+            <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">AI Speaking Partner</h3>
+                    <p class="topic-description">Practice conversations with our smart AI using simple language.</p>
+                </div>
+                <a href="{% url 'checkchatvalidation' %}" class="btn btn-topic">Start Practice</a>
+            </div>
+            
+           
+        </div>
+    </div>
+</section>
+
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about learning with faststart</p>
+        </div>
+        
+        <div class="accordion" id="faqAccordion">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                        How does the AI speaking practice work?
+                    </button>
+                </h3>
+                <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                       Our AI is designed to support beginner-friendly conversations. It uses grammar rules and vocabulary you've already learned to engage with you. You can practice speaking on various topics and receive instant feedback and corrections.<br><br>हमारा AI शुरुआती लोगों के लिए अनुकूल बातचीत का समर्थन करने के लिए डिज़ाइन किया गया है। यह आपके साथ जुड़ने के लिए आपके द्वारा पहले से सीखे गए व्याकरण के नियमों और शब्दावली का उपयोग करता है। आप विभिन्न विषयों पर बोलने का अभ्यास कर सकते हैं और तुरंत प्रतिक्रिया और सुधार प्राप्त कर सकते हैं।
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2-->
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                        Do we need to learn grammar for spoken English?<br><br>क्या हमें अंग्रेजी बोलने के लिए व्याकरण सीखने की आवश्यकता है?
+
+                    </button>
+                </h3>
+                <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes, especially if you struggle to understand the meaning of sentences—such as whether they express ability, possibility, commands, or indicate time (past, present, or future). If you find it hard to understand even a single sentence, we recommend learning the essential grammar rules for spoken English. No matter your level, it will greatly improve your understanding. With just 10 minutes a day, you can cover the basics in 5 to 10 days.<br><br>हां, खासकर अगर आपको वाक्यों का अर्थ समझने में परेशानी होती है - जैसे कि वे क्षमता, संभावना, आदेश व्यक्त करते हैं या समय (भूत, वर्तमान या भविष्य) को इंगित करते हैं। अगर आपको एक भी वाक्य समझने में कठिनाई होती है, तो हम आपको बोली जाने वाली अंग्रेजी के लिए आवश्यक व्याकरण नियमों को सीखने की सलाह देते हैं। आपका स्तर चाहे जो भी हो, इससे आपकी समझ में काफी सुधार होगा। प्रतिदिन केवल 10 मिनट के साथ, आप 5 से 10 दिनों में मूल बातें सीख सकते हैं।
+                    </div>
+                </div>
+            </div> 
+            
+            <!-- Item 3 -->
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                       How much time should we practice each day, and for how many months, to speak English? <br><br>अंग्रेजी बोलने के लिए हमें प्रतिदिन कितना समय और कितने महीनों तक अभ्यास करना चाहिए?
+                    </button>
+                </h3>
+                <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        It depends on your current level, but generally, if you practice speaking, vocabulary, listening, and other skills for at least 1 hour every day on our website, you can start handling everyday conversations easily within 4 to 5 months—regardless of your starting level. Just make sure to focus more on speaking practice.<br><br>यह आपके वर्तमान स्तर पर निर्भर करता है, लेकिन आम तौर पर, यदि आप हमारी वेबसाइट पर हर दिन कम से कम 1 घंटे के लिए बोलने, शब्दावली, सुनने और अन्य कौशल का अभ्यास करते हैं, तो आप 4 से 5 महीनों के भीतर आसानी से रोजमर्रा की बातचीत को संभालना शुरू कर सकते हैं - चाहे आपका शुरुआती स्तर कुछ भी हो। बस बोलने के अभ्यास पर अधिक ध्यान देना सुनिश्चित करें।
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
+                       Why should we learn from this website, and what benefits can we get? <br><br>हमें इस वेबसाइट से क्यों सीखना चाहिए और इससे हमें क्या लाभ मिल सकते हैं?
+                    </button>
+                </h3>
+                <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Whether you're a beginner or advanced, we’ve got content for every level. Everything you need for spoken English is in one place—easy to understand and fun to use. Our smart AI helps you learn faster by saving time on memorizing grammar and vocabulary. You’ll stay motivated and won’t feel bored during your learning journey.<br><br>चाहे आप शुरुआती हों या उन्नत, हमारे पास हर स्तर के लिए सामग्री है। बोली जाने वाली अंग्रेजी के लिए आपको जो कुछ भी चाहिए वह एक ही स्थान पर है - समझने में आसान और उपयोग करने में मज़ेदार। हमारा स्मार्ट AI आपको व्याकरण और शब्दावली याद करने में लगने वाले समय की बचत करके तेज़ी से सीखने में मदद करता है। आप प्रेरित रहेंगे और अपनी सीखने की यात्रा के दौरान ऊब महसूस नहीं करेंगे।
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

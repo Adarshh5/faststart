@@ -1,0 +1,227 @@
+
+
+
+
+/* word_detail.css - Enhanced with AJAX features */
+.word-detail-section {
+    padding: 3rem 0;
+}
+
+.word-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--indigo-dye);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.word-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--indigo-dye);
+}
+
+.word-title {
+    color: var(--mint-green);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.badge {
+    background: var(--indigo-dye);
+    color: var(--aquamarine);
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--aquamarine);
+    box-shadow: 0 0 0 0.25rem rgba(111, 255, 233, 0.1);
+}
+
+.definition, .example, .meaning, .level {
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+strong {
+    color: var(--aquamarine);
+}
+
+.custom-definition {
+    background: rgba(58, 80, 107, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+}
+
+.custom-definition h4 {
+    color: var(--mint-green);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--indigo-dye);
+    padding-bottom: 0.75rem;
+}
+
+.definition-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--indigo-dye);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.btn-toggle-save {
+    background: rgba(155, 248, 203, 0.1);
+    border: 1px solid var(--mint-green);
+    color: var(--mint-green);
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.btn-toggle-save:hover {
+    background: rgba(155, 248, 203, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-toggle-save:disabled {
+    opacity: 0.7;
+    transform: none;
+}
+
+.btn-add-def, .btn-delete-def {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-add-def:hover, .btn-delete-def:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(142, 45, 226, 0.3);
+}
+
+.btn-delete-def {
+    background: linear-gradient(135deg, #e0004a, #e22d8e);
+}
+
+/* Accordion Styles */
+.faq-accordion {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--indigo-dye);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+}
+
+.accordion-title {
+    color: var(--mint-green);
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.accordion-item {
+    background: transparent;
+    border: 1px solid var(--indigo-dye);
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-weight: 500;
+    border-radius: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(111, 255, 233, 0.08);
+    color: var(--aquamarine);
+    box-shadow: none;
+}
+
+.accordion-body {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Alert Message */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    z-index: 10000;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 300px;
+}
+
+.alert-success {
+    background: rgba(155, 248, 203, 0.9);
+    color: var(--gunmetal);
+    box-shadow: 0 4px 15px rgba(155, 248, 203, 0.3);
+}
+
+.alert-error {
+    background: rgba(255, 107, 107, 0.9);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .word-card, .custom-definition, .faq-accordion {
+        padding: 1.5rem;
+    }
+    
+    .word-title {
+        font-size: 1.75rem;
+    }
+    
+    .word-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .btn-toggle-save {
+        align-self: flex-start;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

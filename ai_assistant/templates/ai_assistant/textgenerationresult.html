@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'ai_assistant/css/textgenerationresult.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="result-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Result Header -->
+                <div class="result-header mb-5">
+                    <h2 class="result-title">Generated Content</h2>
+                    <div class="tts-controls">
+                        <button id="listenBtn" class="btn btn-tts">
+                            <i class="fas fa-play me-2"></i>Listen
+                        </button>
+                        <button id="stopBtn" class="btn btn-tts d-none">
+                            <i class="fas fa-stop me-2"></i>Stop
+                        </button>
+                        <div id="wave" class="tts-wave d-none"></div>
+                    </div>
+                </div>
+
+                <!-- Story Content -->
+                <div class="story-card">
+                    <div id="story-content" class="story-content">
+                        {{ llm_response|linebreaks }}
+                    </div>
+                </div>
+
+                <!-- Accordion -->
+                <div class="related-info mt-5">
+                    <div class="accordion" id="infoAccordion">
+                        <div class="accordion-item">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#contentTips">
+                                    Content Improvement Tips
+                                </button>
+                            </h5>
+                            <div id="contentTips" class="accordion-collapse collapse" 
+                                data-bs-parent="#infoAccordion">
+                                <div class="accordion-body">
+                                    <!-- Add your tips content here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'ai_assistant/js/textgenerationresult.js' %}"></script>
+{% endblock %}

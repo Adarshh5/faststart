@@ -1,0 +1,146 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'core/css/word_detail.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<section class="word-detail-section">
+    <div class="container">
+        <div class="word-card">
+            <div class="word-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="word-title">{{ word.word_name }}</h2>
+                    <span class="badge bg-secondary">{{ word.part_of_speech }}</span>
+                </div>
+                {% if user.is_authenticated %}
+                    <button id="saveWordBtn" class="btn btn-toggle-save" data-word="{{ word.word_name }}">
+                        {% if word_added %}
+                            <i class="fas fa-bookmark"></i> Saved
+                        {% else %}
+                            <i class="far fa-bookmark"></i> Save
+                        {% endif %}
+                    </button>
+                {% endif %}
+            </div>
+
+            <p class="definition"><strong>Definition:</strong> {{ word.definition }}</p>
+            <p class="example"><strong>Example:</strong> <em>{{ word.example|linebreaks }}</em></p>
+            <p class="meaning"><strong>Hindi:</strong> {{ word.hindi_meaning }}</p>
+            <p class="level"><strong>Level:</strong> {{ word.level|title }}</p>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="custom-definition mt-5">
+            <h4>Your Custom Definition</h4>
+
+            {% if definitionalreadyadded %}
+                <form method="POST" action="{% url 'delete_definition' %}">
+                    {% csrf_token %}
+                    <div class="definition-box">
+                        <p>{{ userdefinition }}</p>
+                    </div>
+                    <input type="hidden" name="word" value="{{ word.word_name }}">
+                    <button type="submit" class="btn btn-delete-def mt-3">
+                        <i class="fas fa-trash me-2"></i>Delete Definition
+                    </button>
+                </form>
+            {% else %}
+                <form method="POST" action="{% url 'add_definition' %}">
+                    {% csrf_token %}
+                    <textarea name="definition" rows="5" class="form-control" maxlength="1000" placeholder="Write your own definition (max 5 lines)..."></textarea>
+                    <input type="hidden" name="word" value="{{ word.word_name }}">
+                    <button type="submit" class="btn btn-add-def mt-3">
+                        <i class="fas fa-plus me-2"></i>Add Definition
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Accordion Section -->
+        <div class="faq-accordion mt-5">
+            <h4 class="accordion-title mb-4">FAQ</h4>
+            
+            <div class="accordion" id="wordTipsAccordion">
+    
+                <!-- Item 1 -->
+                <div class="accordion-item">
+                    <h5 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#tipOne">
+                           What is the use of the Save button, and why should we click it after learning a word?<br><br>सेव बटन का क्या उपयोग है और हमें कोई शब्द सीखने के बाद इस पर क्लिक क्यों करना चाहिए?
+                        </button>
+                    </h5>
+                    <div id="tipOne" class="accordion-collapse collapse" 
+                        data-bs-parent="#wordTipsAccordion">
+                        <div class="accordion-body">
+                            When you click the Save button, it means you've learned that word. The AI will then use this word in future conversations or content it generates for you. This helps reinforce your learning and saves you time by not repeating the same word over and over. It ensures the AI includes your learned vocabulary in real conversations.<br><br>जब आप सेव बटन पर क्लिक करते हैं, तो इसका मतलब है कि आपने वह शब्द सीख लिया है। AI तब इस शब्द का उपयोग भविष्य की बातचीत या आपके लिए तैयार की जाने वाली सामग्री में करेगा। यह आपके सीखने को सुदृढ़ करने में मदद करता है और एक ही शब्द को बार-बार न दोहराकर आपका समय बचाता है। यह सुनिश्चित करता है कि AI वास्तविक बातचीत में आपकी सीखी हुई शब्दावली को शामिल करे।
+                        </div>
+                    </div>
+                </div>
+               
+
+                <!-- Item 2 -->
+                <div class="accordion-item">
+                    <h5 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#tipTwo">
+                           Why should we save our own definition for each word, and how many should we save?<br><br>हमें प्रत्येक शब्द के लिए अपनी स्वयं की परिभाषा क्यों बचानी चाहिए, और हमें कितनी परिभाषाएँ बचानी चाहिए?
+                        </button>
+                    </h5>
+                    <div id="tipTwo" class="accordion-collapse collapse" 
+                        data-bs-parent="#wordTipsAccordion">
+                        <div class="accordion-body">
+                          The main purpose is to help you start thinking in English. When you write your own definition, you begin forming thoughts in English. At first, you might write in your native language (like Hindi), but gradually you'll shift to thinking directly in English—usually within 1 to 2 months.There are other benefits too:It reduces spelling mistakes, It helps you understand how to use the word correctly in real-life situations, You can save up to 500 words definition, but focus on quality. Start with 5–10 words daily and grow from there.<br><br>इसका मुख्य उद्देश्य आपको अंग्रेजी में सोचना शुरू करने में मदद करना है। जब आप अपनी खुद की परिभाषा लिखते हैं, तो आप अंग्रेजी में विचार बनाना शुरू करते हैं। शुरुआत में, आप अपनी मूल भाषा (जैसे हिंदी) में लिख सकते हैं, लेकिन धीरे-धीरे आप सीधे अंग्रेजी में सोचना शुरू कर देंगे - आमतौर पर 1 से 2 महीने के भीतर। इसके अन्य लाभ भी हैं: यह वर्तनी की गलतियों को कम करता है यह आपको यह समझने में मदद करता है कि वास्तविक जीवन की स्थितियों में शब्द का सही तरीके से उपयोग कैसे किया जाए आप परिभाषा में 500 शब्दों तक बचा सकते हैं, लेकिन गुणवत्ता पर ध्यान दें। प्रतिदिन 5-10 शब्दों से शुरू करें और वहाँ से आगे बढ़ें।
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item">
+                    <h5 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#tipThree">
+                           How many words do we need to learn to speak English?<br><br>अंग्रेजी बोलना सीखने के लिए हमें कितने शब्द सीखने की आवश्यकता है?
+                        </button>
+                    </h5>
+                    <div id="tipThree" class="accordion-collapse collapse" 
+                        data-bs-parent="#wordTipsAccordion">
+                        <div class="accordion-body">
+                          Generally, learning 1,000 to 2,000 words is enough to handle everyday conversations. Most conversations use a fixed set of common words, so mastering these will allow you to speak and understand English in daily situations.<br><br>आम तौर पर, रोज़मर्रा की बातचीत को संभालने के लिए 1,000 से 2,000 शब्द सीखना पर्याप्त होता है। ज़्यादातर बातचीत में आम शब्दों के एक निश्चित सेट का इस्तेमाल होता है, इसलिए इनमें महारत हासिल करने से आप रोज़मर्रा की परिस्थितियों में अंग्रेज़ी बोल और समझ पाएँगे।
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                 <!-- Item 4
+                <div class="accordion-item">
+                    <h5 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#tipfour">
+                            How to remember difficult words?
+                        </button>
+                    </h5>
+                    <div id="tipfour" class="accordion-collapse collapse" 
+                        data-bs-parent="#wordTipsAccordion">
+                        <div class="accordion-body">
+                            Use the word in sentences throughout your day. Create mental images associated with the word. 
+                            Connect it to words you already know. Review it several times over a week.
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/word_detail.js/' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'user_data/css/Profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="row g-0">
+    <!-- Desktop Sidebar -->
+    <div class="col-lg-2 desktop-sidebar d-none d-lg-block">
+      <div class="sidebar-header">
+        <h5 class="sidebar-title">Navigation</h5>
+      </div>
+      <ul class="nav flex-column">
+         <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-lightbulb"></i> Information
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-user me-2"></i>User Details
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'savedVocabulary' %}">
+            <i class="fas fa-save me-2"></i>Saved Words
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-book me-2"></i>User Words
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-robot me-2"></i>Doubt Solving
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-chart-line me-2"></i>Progress
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-comment me-2"></i>Feedback
+          </a>
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ChangePassword' %}">
+            <i class="fas fa-key"></i> </i> ChangePassword
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="col-lg-10 px-4 py-4 main-content">
+      <!-- Mobile Toggle Button -->
+      <button class="btn btn-toggle d-lg-none mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="content-box">
+        <h2 class="mb-4">Welcome to Your English Learning Dashboard</h2>
+        <div class="language-mix">
+          <p class="hindi-text">
+            अगर आप AI generated story या content use करना चाहते हैं और AI से बात करना चाहते हैं, तो कम से कम तीन grammar lesson complete करें – simple sentences, tense, modals – और कम से कम 20 vocabulary words सीखें। अगर आप already grammar जानते हैं, तो हर grammar topic पर "Mark as Complate" पर click करें, क्योंकि AI वही concept content और story में use करेगा।
+          </p>
+          <p class="hindi-text">
+            हर section के नीचे question answer दिए गए हैं, उन्हें जरूर पढ़ें ताकि आप common सवालों के जवाब समझ सकें और feature को अच्छे से use कर सकें।
+          </p>
+          <p class="hindi-text">
+            हम एक single web app में सभी English speaking से जुड़ी चीजें provide कर रहे हैं – जैसे basic grammar (beginners के लिए), spoken vocabulary, रोज का AI reading content ताकि आपकी सीखी vocabulary और grammar rules आप content में देख सकें। इससे आपको वो चीजें automatically use करने में मदद मिलेगी।
+          </p>
+          <p class="hindi-text">
+            इससे आपका time बचेगा क्योंकि एक vocabulary बार-बार learn नहीं करनी पड़ेगी। साथ ही listening guide आपकी level पर based होगा और कुछ important links और AI chatbot भी मिलेगा जो simple English use करेगा।
+          </p>
+          <p class="hindi-text">
+            जिससे आप आसानी से समझ सकें और chatbot आपके सीखे गए concepts को ही response में use करेगा।
+          </p>
+          <!-- <div class="note-box mt-4">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <strong>Note:</strong> अगर आपको इस application को use करने और समझने में problem हो रही है, तो हमारे Chatbot Guide से बात करें – यह आपको minimum info से मदद करेगा।
+          </div> -->
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Mobile Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user me-2"></i>User Details</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'savedVocabulary' %}"><i class="fas fa-save me-2"></i>Saved Words</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-book me-2"></i>Userwords</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-robot me-2"></i>Doubt Solving</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-chart-line me-2"></i>Progress</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-comment me-2"></i>Feedback</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'ChangePassword' %}"><i class="fas fa-key"></i> </i> ChangePassword</a></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'user_data/js/Profile.js' %}"></script>
+{% endblock %}

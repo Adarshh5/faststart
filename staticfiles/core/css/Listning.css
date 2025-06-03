@@ -1,0 +1,136 @@
+/* Listening Section */
+.listening-section {
+    padding: 4rem 0;
+    color: var(--text-primary);
+}
+
+.section-title {
+    color: var(--mint-green);
+    /* border-bottom: 2px solid var(--indigo-dye); */
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.intro-card, .level-card {
+    background: rgba(255, 255, 255, 0.03);
+    /* border: 1px solid var(--indigo-dye);
+    border-radius: 12px; */
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.level-title {
+    color: var(--aquamarine);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Language Mix */
+.language-mix {
+    margin-bottom: 1.5rem;
+}
+
+.english-text {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.hindi-text {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+/* Resource List */
+.resource-list {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.resource-list li {
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.resource-list li::before {
+    content: "→";
+    color: var(--aquamarine);
+    position: absolute;
+    left: -1.5rem;
+}
+
+.resource-list a {
+    color: var(--mint-green);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px dashed var(--aquamarine);
+    padding-bottom: 2px;
+}
+
+.resource-list a:hover {
+    color: var(--aquamarine);
+    border-bottom-style: solid;
+}
+
+/* Note Box */
+.note-box {
+    background: rgba(58, 80, 107, 0.3);
+    border-left: 3px solid var(--aquamarine);
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-top: 1.5rem;
+}
+
+/* Accordion */
+.faq-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--indigo-dye);
+}
+
+.accordion-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--indigo-dye);
+    margin-bottom: 0.75rem;
+}
+
+.accordion-button {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(111, 255, 233, 0.05);
+    color: var(--aquamarine);
+}
+
+.accordion-body {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .listening-section {
+        padding: 2rem 0;
+    }
+    
+    .intro-card, .level-card {
+        padding: 1.5rem;
+        margin: 0 0.5rem 1.5rem;
+    }
+    
+    .resource-list {
+        padding-left: 1.25rem;
+    }
+    
+    .accordion-button {
+        padding: 1rem;
+    }
+}
