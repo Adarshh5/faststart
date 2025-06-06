@@ -180,42 +180,7 @@ body {
         font-size: 1.1rem;
     }
 }
-/* .footer {
-    background: var(--gunmetal);
-    color: var(--text-secondary);
-    padding: 2rem 0;
-}
 
-.footer-heading {
-    color: var(--aquamarine);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-.footer-links li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--mint-green);
-}
-
-.social-links a {
-    color: var(--text-secondary);
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--aquamarine);
-} */
 
 @media (max-width: 768px) {
     .navbar-brand {

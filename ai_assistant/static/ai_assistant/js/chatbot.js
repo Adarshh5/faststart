@@ -12,6 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
       let recognition;
       let isListening = false;
       let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const textarea = document.getElementById("userInput");
+      textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = Math.min(this.scrollHeight, 72) + "px"; // 72px ~ 3 lines
+      });
 
       // Initialize message count
       if (messageCount) {
@@ -245,4 +250,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Initial scroll to bottom
       scrollToBottom();
+        
+     
   });

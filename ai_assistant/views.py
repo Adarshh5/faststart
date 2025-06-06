@@ -3,7 +3,7 @@ from user_data.models import SavedGrammar, UserVocabulary, SavedVocabulary,UserD
 from .forms import UserContentStylingForm
 from django.views import View
 from django.http import JsonResponse
-from .textgnerationtemplate import inputwithgrammar, inputwithoutgrammar, llm, build_chat_history, translate_to_hindi
+from .textgnerationtemplate import inputwithgrammar, inputwithoutgrammar, llm, build_chat_history, translate_to_hindi, build_chat_history_without_vocabulary
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from django.utils import timezone
 from datetime import timedelta
@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 
 def get_user_grammar_list(user):
     grammar_list = [
-        "simple sentences where the subject doesn't do any work such as -> Ram is good man, raju was in school, we  will/would be in the space in the future, shetal had two sister,  class 5th student don't have laptop , my friend will/would have car   ",
-        "tense usage",
+        "simple sentences where the subject doesn't do any work such as -> Ram is good man, raju was in school, we will/would be on the space in the future, shetal had two sister,  class 5th student don't have laptop , my friend will/would have car   ",
+        "use tense ",
         "modal verbs: can/could/might/would, can/could/would be + obj, can/could/would have + obj, has/have to, will have to, need to"
     ]
     
@@ -193,21 +193,22 @@ def textgenerationresult(request):
 @method_decorator(login_required, name='dispatch')
 class Chatbot(View):
     def get(self, request):
-
         user = request.user
-
-        grammar_list = get_user_grammar_list(user)
-        vocab_list = notincludevocabulary(user)
-        grammar_string = ", ".join(grammar_list)
-        vocab_list = [w for w in vocab_list if isinstance(w, str) and w.strip()]
-        vocab_string = ", ".join(vocab_list)
-
         if 'session_chat_history' not in request.session:
             request.session['session_chat_history'] = []
 
-        # Build full history for LLM
-        _ = build_chat_history(request, grammar_string, vocab_string)
+        grammar_list = get_user_grammar_list(user)
+        vocab_list = notincludevocabulary(user)
 
+        if len(vocab_list) > 20:
+            _ = build_chat_history_without_vocabulary(request)
+        else:
+            grammar_string = ", ".join(grammar_list)
+            vocab_list = [w for w in vocab_list if isinstance(w, str) and w.strip()]
+            vocab_string = ", ".join(vocab_list)
+            _ = build_chat_history(request, grammar_string, vocab_string)
+
+       
         return render(request, 'ai_assistant/chatbot.html', {
             'chat_history': request.session['session_chat_history'],
         })
@@ -231,18 +232,25 @@ class Chatbot(View):
             # Build context
             grammar_list = get_user_grammar_list(user)
             vocab_list = notincludevocabulary(user)
+            
 
-            grammar_string = ", ".join(grammar_list)
-            vocab_string = ", ".join(vocab_list)
+            if len(vocab_list) < 20:
+                  print("inside")
+                  chat_history = build_chat_history_without_vocabulary(request)
+            else:
+                 grammar_string = ", ".join(grammar_list)
+                 vocab_string = ", ".join(vocab_list)
+                 chat_history = build_chat_history(request, grammar_string, vocab_string)
              # Save messages
             request.session['session_chat_history'].append(
                 {'type': 'user', 'content': user_message}
             )
 
-            chat_history = build_chat_history(request, grammar_string, vocab_string)
+            
             chat_history.append(HumanMessage(content=user_message))
+            print(chat_history)
 
-            # LLM response
+          
             response = llm.invoke(chat_history)
 
             if isinstance(response, str):
@@ -251,7 +259,7 @@ class Chatbot(View):
                 ai_message = response
             chat_history.append(ai_message)
 
-            # ✅ Update message count AFTER successful completion
+           
             message_usage.message_count += 1
             message_usage.save()
 

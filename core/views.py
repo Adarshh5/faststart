@@ -150,15 +150,7 @@ def checkchatvalidation(request):
         messages.info(request, "You’ve reached today’s message limit.")
         return redirect('home')
 
-    # Grammar check
-    if not (grammarobj.simple_sentence or grammarobj.tense or grammarobj.modal_part_1 or grammarobj.modal_part_2):
-        messages.info(request, 'You have to complete at least one of: simple sentence, tense, or modals.')
-        return redirect('home')
-
-    # Vocabulary check
-    if len(vocabularyobj.words) < 20:
-        messages.info(request, 'You have to add at least 20 words to generate text content.')
-        return redirect('home')
+  
 
     return redirect('Chatbot')
 

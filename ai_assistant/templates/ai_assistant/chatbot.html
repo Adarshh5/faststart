@@ -56,10 +56,11 @@
             <form id="chatForm" data-url="{% url 'Chatbot' %}">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" id="userInput" name="user_message" 
-                        class="form-control" 
+                        <textarea id="userInput" name="user_message" 
+                        class="form-control chat-textarea" 
                         placeholder="Type your message..." 
-                        autocomplete="off" required>
+                        autocomplete="off" rows="1" 
+                        style="resize: none;" required></textarea>
                     <button type="button" id="speakBtn" class="btn btn-voice">
                         <i class="fas fa-microphone"></i>
                     </button>

@@ -95,6 +95,45 @@ llm=ChatGroq(model='llama3-70b-8192')
 
 # llm = OllamaLLM(model="gemma:2b")
 
+
+def build_chat_history_without_vocabulary(request):
+    system_msg = SystemMessage(content=f"""You are a helpful English speaker with an Indian accent. Speak only in English and always begin with a friendly greeting.
+- Focus on making conversations engaging, clear, and relevant so users enjoy chatting longer.
+- Always end with a question to keep the conversation going.
+- Speak in simple, beginner-friendly English that new learners can easily follow.
+- Limit your responses to under 50 words.
+""")
+
+    chat_history = [system_msg]
+    all_messages = request.session.get('session_chat_history', [])
+
+    if len(all_messages) <= 6:
+        # Use all messages if they're few
+        for msg in all_messages:
+            if msg['type'] == 'user':
+                chat_history.append(HumanMessage(content=msg['content']))
+            elif msg['type'] == 'ai':
+                chat_history.append(AIMessage(content=msg['content']))
+    else:
+        # Filter last 3 user and last 3 ai messages separately
+        last_user_msgs = [m for m in reversed(all_messages) if m['type'] == 'user'][:3]
+        last_ai_msgs = [m for m in reversed(all_messages) if m['type'] == 'ai'][:3]
+
+        # Combine and reverse to maintain order
+        trimmed_msgs = sorted(last_user_msgs + last_ai_msgs, key=lambda x: all_messages.index(x))
+
+        for msg in trimmed_msgs:
+            if msg['type'] == 'user':
+                chat_history.append(HumanMessage(content=msg['content']))
+            elif msg['type'] == 'ai':
+                chat_history.append(AIMessage(content=msg['content']))
+
+    return chat_history
+
+
+
+
+
 def build_chat_history(request, grammar_string, vocab_string):
     system_msg = SystemMessage(content=f"""You are a helpful English speaker with an Indian accent. Speak only in English and always begin with a friendly greeting.
 
