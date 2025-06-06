@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let recognition;
       let isListening = false;
       let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      
       const textarea = document.getElementById("userInput");
       textarea.addEventListener("input", function () {
         this.style.height = "auto";
