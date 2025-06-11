@@ -144,3 +144,14 @@ class UserDailyMessageUsage(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.message_count} messages on {self.date}"
+
+
+
+
+# class feedback(models.Model):
+#     user=models.OneToOneField(User, null=True)
+#     sentiment = models.CharField(choices=[
+#         ("Positive","Positive"),
+#         ("Negetive","Negetive")
+#     ])
+#     user_feedback = models.TextField()
