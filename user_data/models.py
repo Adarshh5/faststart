@@ -147,6 +147,17 @@ class UserDailyMessageUsage(models.Model):
 
 
 
+class UserDailyDoubtSolving(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now=True)
+    message_count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ('user', 'date')
+
+    def __str__(self):
+        return f"{self.user.email} - {self.message_count} messages on {self.date}"
+
 
 # class feedback(models.Model):
 #     user=models.OneToOneField(User, null=True)

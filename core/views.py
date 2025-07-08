@@ -24,6 +24,8 @@ logger = logging.getLogger(__name__)
 
 def home(request):
     request.session.pop('session_chat_history', None)
+    request.session.pop('session_AItutor_history', None)
+    request.session.pop('session_user_chat_history', None)
     return render(request, 'core/home.html')
 
 
@@ -133,9 +135,6 @@ class WordDetail(View):
 @login_required
 def checkchatvalidation(request):
     user = request.user
-    grammarobj, _ = SavedGrammar.objects.get_or_create(user=user)
-    vocabularyobj, _ = SavedVocabulary.objects.get_or_create(user=user)
-
     # Free tier logic
     start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
     days_used = (timezone.now().date() - start_record.start_date).days

@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import SavedGrammar, SavedVocabulary, UserWordDefinitions, UserVocabulary, UserSavedContent, UserFreeTierStart, UserDailyStoryUsage, UserDailyMessageUsage
+from .models import SavedGrammar, SavedVocabulary, UserWordDefinitions, UserVocabulary, UserSavedContent, UserFreeTierStart, UserDailyStoryUsage, UserDailyMessageUsage, UserDailyDoubtSolving
 from django.core.exceptions import ValidationError
 
 @admin.register(SavedGrammar)
@@ -93,6 +93,13 @@ class UserDailyStoryUsageAdmin(admin.ModelAdmin):
 
 @admin.register(UserDailyMessageUsage)
 class UserDailyMessageUsageAdmin(admin.ModelAdmin):
+    list_display = ('user', 'date', 'message_count')
+    list_filter = ('date',)
+    search_fields = ('user__email',)
+
+
+@admin.register(UserDailyDoubtSolving)
+class UserDailyDoubtSolvingAdmin(admin.ModelAdmin):
     list_display = ('user', 'date', 'message_count')
     list_filter = ('date',)
     search_fields = ('user__email',)
