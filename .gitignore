@@ -8,3 +8,15 @@ errors.log
 __pycache__/
 *.pyc
 *.pyo
+
+
+
+*.pyc
+__pycache__/
+*.log
+.env
+db.sqlite3
+.vscode/
+.idea/
+*.DS_Store
+venv

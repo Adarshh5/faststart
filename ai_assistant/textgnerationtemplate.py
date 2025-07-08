@@ -3,7 +3,6 @@ from langchain_groq import ChatGroq
 from langchain.prompts.chat import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_core.output_parsers import StrOutputParser 
 from langchain_openai import ChatOpenAI
-
 from dotenv import load_dotenv
 from langchain_ollama import OllamaLLM
 
@@ -190,3 +189,6 @@ def translate_to_hindi(text):
         ai_message = response
 
     return ai_message.content.strip()
+
+
+

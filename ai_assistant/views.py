@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from user_data.models import SavedGrammar, UserVocabulary, SavedVocabulary,UserDailyStoryUsage, UserDailyMessageUsage, UserFreeTierStart
+from user_data.models import SavedGrammar, UserVocabulary, SavedVocabulary,UserDailyStoryUsage, UserDailyMessageUsage, UserFreeTierStart, UserDailyDoubtSolving
 from .forms import UserContentStylingForm
 from django.views import View
 from django.http import JsonResponse
@@ -18,6 +18,13 @@ from django.http import HttpResponse
 
 from core.safe_get import safe_get_or_create
 import logging
+from .AI_tutor.Agentic import system_message, AgentState, graph
+from .AI_tutor.message_convert import serialize_message, deserialize_message
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -194,6 +201,11 @@ def textgenerationresult(request):
 class Chatbot(View):
     def get(self, request):
         user = request.user
+        start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
+        days_used = (timezone.now().date() - start_record.start_date).days
+        if days_used >= 10:
+            messages.info(request, "Your free tier has expired.")
+            return redirect('home')
         if 'session_chat_history' not in request.session:
             request.session['session_chat_history'] = []
 
@@ -226,7 +238,7 @@ class Chatbot(View):
             today = localtime(timezone.now()).date()
             message_usage, _ = UserDailyMessageUsage.objects.get_or_create(user=user, date=today)
 
-            if message_usage.message_count >= 20:
+            if message_usage.message_count >= int(os.getenv("Message_limit")):
                 return JsonResponse({'reply': "⛔ You have sent 20 messages. Limit reached!"})
 
             # Build context
@@ -241,7 +253,7 @@ class Chatbot(View):
                  grammar_string = ", ".join(grammar_list)
                  vocab_string = ", ".join(vocab_list)
                  chat_history = build_chat_history(request, grammar_string, vocab_string)
-             # Save messages
+            
             request.session['session_chat_history'].append(
                 {'type': 'user', 'content': user_message}
             )
@@ -263,7 +275,7 @@ class Chatbot(View):
             message_usage.message_count += 1
             message_usage.save()
 
-            # Translate
+            
             hindi_translation = translate_to_hindi(ai_message.content)
 
            
@@ -285,3 +297,91 @@ class Chatbot(View):
             logger.error("Chatbot error: %s", str(e))
             
             return JsonResponse({'error': 'An unexpected error occurred. Please try again.'})
+        
+
+
+
+@method_decorator(login_required, name='dispatch')
+class AItutor(View):
+    def get(self, request):
+        user = request.user
+        start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
+        days_used = (timezone.now().date() - start_record.start_date).days
+        if days_used >= 10:
+            messages.info(request, "Your free tier has expired.")
+            return redirect('home')
+
+        request.session.setdefault('session_AItutor_history', [])
+        request.session.setdefault('session_user_chat_history', [])
+        
+        return render(request, 'ai_assistant/AItutor.html', {
+            'chat_history': request.session['session_user_chat_history'],
+        })
+    
+    def post(self, request):
+        try:
+            user = request.user
+            data = json.loads(request.body)
+            user_message = data.get('user_message')
+
+            if not user_message:
+                return JsonResponse({'error': 'No message provided.'}, status=400)
+            
+            today = localtime(timezone.now()).date()
+            message_usage, _ = UserDailyDoubtSolving.objects.get_or_create(user=user, date=today)
+
+            if message_usage.message_count >= int(os.getenv("Doubt_soling_chatlimit")):
+                return JsonResponse({'reply': "⛔ You have sent 5 messages. Limit reached!"})
+
+            # Add user message to history (frontend format)
+            request.session['session_user_chat_history'].append(
+                {"role": "user", "content": user_message}
+            )
+            
+            # Deserialize stored messages
+            stored_messages = [
+                deserialize_message(msg) 
+                for msg in request.session.get('session_AItutor_history', [])
+            ]
+            # print(stored_messages)
+            
+            # Prepare agent state
+            initial_messages = [
+                SystemMessage(content=system_message),
+                *stored_messages,
+                HumanMessage(content=user_message)
+            ]
+            
+            # Invoke graph
+            agent_state = {"messages": initial_messages}
+            LLM_response = graph.invoke(agent_state)
+            
+            # Get only new messages
+            new_messages = LLM_response["messages"][len(initial_messages):]
+            
+            
+            # Serialize and store full history
+            request.session['session_AItutor_history'] = [
+                serialize_message(msg) 
+                for msg in initial_messages[1:] + new_messages  # Exclude system message
+            ][-10:]  
+            
+            # Get final response
+            final_response = new_messages[-1].content
+            message_usage.message_count += 1
+            message_usage.save()
+            
+         
+            request.session['session_user_chat_history'].append(
+                {"role": "assistant", "content": final_response}
+            )
+            
+            request.session.modified = True
+            return JsonResponse({'reply': final_response})
+
+        except Exception as e:
+            logger.error("Chatbot error: %s", str(e), exc_info=True)
+            return JsonResponse(
+                {'error': 'An unexpected error occurred. Please try again.'},
+                status=500
+            )
