@@ -13,8 +13,13 @@ class UserManager(BaseUserManager):
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.is_active = False 
+        # user.set_password(password)
+        if password:
+            user.set_password(password)
+        else:
+            user.set_unusable_password()  # 👈 this is perfect for Google login users
+
+        user.is_active = True
         user.save(using=self._db)
         return user
 
@@ -39,7 +44,8 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)  # Added tracking
+    created_at  = models.DateTimeField(auto_now_add=True)  # Added tracking
+    updated_at = models.DateTimeField(auto_now=True) 
 
 
     objects = UserManager()

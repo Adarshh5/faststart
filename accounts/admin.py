@@ -30,7 +30,7 @@ admin.site.register(User, CustomUserAdmin)
 class UserAgreementAdmin(admin.ModelAdmin):
     readonly_fields = ('user', 'agreed', 'agreed_at')
     list_display = ('user', 'agreed', 'agreed_at')
-    def has_add_permission(self, request):
-        return False  # Prevent manual addition
-    def has_delete_permission(self, request, obj=None):
-        return False  # Prevent deletion
+    # def has_add_permission(self, request):
+    #     return False  # Prevent manual addition
+    # def has_delete_permission(self, request, obj=None):
+    #     return False  # Prevent deletion
