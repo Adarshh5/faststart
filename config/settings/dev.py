@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = True
-
+ALLOWED_HOSTS = ["*"]
 DJANGO_ENV = 'development'
 
 LOGGING = {

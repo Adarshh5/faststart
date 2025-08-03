@@ -76,7 +76,7 @@ def saveuserdefinition(request):
             messages.success(request, "Definition saved.")
         else:
             messages.error(request, "Invalid form: " + str(form.errors))
-
+        word = form.cleaned_data['word']
         obj = Vocabulary.objects.get(word_name=word)
         return redirect(f"/word_detail/{obj.id}")
     

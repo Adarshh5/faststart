@@ -3,7 +3,7 @@ from .base import *
 DEBUG = False
 
 DJANGO_ENV = 'production'
-
+ALLOWED_HOSTS = ["*"]
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

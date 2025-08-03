@@ -204,11 +204,11 @@ def textgenerationresult(request):
 class Chatbot(View):
     def get(self, request):
         user = request.user
-        print(timezone.now())
+      
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
-        print("UserFreeTierStart",start_record.start_date)
+      
         days_used = (timezone.now() - start_record.start_date).days
-        print("how many days are left",days_used)
+       
         if days_used >= 10:
             messages.info(request, "Your free tier has expired.")
             return redirect('home')
@@ -242,11 +242,10 @@ class Chatbot(View):
                 return JsonResponse({'error': 'No message provided.'})
 
             today = timezone.now().date()
-            print('date-',today)
+          
             message_usage, _ = UserDailyMessageUsage.objects.get_or_create(user=user, date=today)
-            print("usermessageusase", message_usage.date)
-
-            if message_usage.message_count >= int(os.getenv("Message_limit")):
+          
+            if message_usage.message_count >= int(os.environ["Message_limit"]):
                 return JsonResponse({'reply': "⛔ You have sent 20 messages. Limit reached!"})
 
             # Build context
@@ -268,8 +267,7 @@ class Chatbot(View):
 
             
             chat_history.append(HumanMessage(content=user_message))
-            print(chat_history)
-
+          
           
             response = llm.invoke(chat_history)
 
@@ -338,9 +336,9 @@ class AItutor(View):
             today = timezone.now().date()
             # print("today time from timezone : -", today)
             message_usage, _ = UserDailyDoubtSolving.objects.get_or_create(user=user, date=today)
-            print( message_usage.date)
+      
 
-            if message_usage.message_count >= int(os.getenv("Doubt_soling_chatlimit")):
+            if message_usage.message_count >= int(os.environ["Doubt_soling_chatlimit"]):
                 return JsonResponse({'reply': "⛔ You have sent 5 messages. Limit reached!"})
 
             # Add user message to history (frontend format)
@@ -368,7 +366,7 @@ class AItutor(View):
             
             # Get only new messages
             new_messages = LLM_response["messages"][len(initial_messages):]
-            print(new_messages)
+         
             
             
             # Serialize and store full history
