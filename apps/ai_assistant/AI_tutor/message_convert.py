@@ -4,7 +4,7 @@ import json
 def serialize_message(msg:BaseMessage) -> dict: 
     """Convert LangChain messages to JSON-serializable dicts"""
     base = {
-        "type": msg.type,
+        "role": msg.type,
         "content": msg.content,
         "additional_kwargs": getattr(msg, "additional_kwargs", {}),
         "id": str(getattr(msg, "id", ""))
@@ -45,12 +45,12 @@ def convert_tool_calls_openai_to_langchain(tool_calls: list[dict]) -> list[dict]
 
 def deserialize_message(msg_dict:dict)-> BaseMessage: 
     """Convert dicts back to LangChain messages"""
-    msg_type = msg_dict.get('type')
+    msg_type = msg_dict.get('role')
     content = msg_dict.get("content", "")
     kwargs = msg_dict.get("additional_kwargs", {})
 
     
-    if msg_type == "ai" and "tool_calls" in msg_dict:
+    if msg_type == "assistant" and "tool_calls" in msg_dict:
         raw_tool_calls = msg_dict["tool_calls"]
         if raw_tool_calls and "function" in raw_tool_calls[0]:
             # OpenAI-style tool calls – convert to LangChain format
@@ -58,10 +58,10 @@ def deserialize_message(msg_dict:dict)-> BaseMessage:
         else:
             kwargs["tool_calls"] = raw_tool_calls
 
-    if msg_type == "human":
+    if msg_type == "user":
         return HumanMessage(content=content, **kwargs)
 
-    elif msg_type == "ai":
+    elif msg_type == "assistant":
         return AIMessage(content=content, **kwargs)
 
     elif msg_type == "tool":

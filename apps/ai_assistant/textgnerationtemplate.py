@@ -92,7 +92,6 @@ load_dotenv()
 
 llm=ChatGroq(model='llama3-70b-8192')
 
-# llm = OllamaLLM(model="gemma:2b")
 
 
 def build_chat_history_without_vocabulary(request):

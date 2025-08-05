@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             saveWordBtn.disabled = true;
             
             // Send AJAX request
-            fetch('/userdata/toggle_save_word/', {
+            fetch('/userdata/toggle-save-word/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

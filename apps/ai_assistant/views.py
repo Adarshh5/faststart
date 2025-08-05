@@ -345,11 +345,12 @@ class AItutor(View):
             request.session['session_user_chat_history'].append(
                 {"role": "user", "content": user_message}
             )
-            
+            chat_history = request.session.get('session_user_chat_history', [])
+            last_two_messages = chat_history[-2:] 
             # Deserialize stored messages
             stored_messages = [
                 deserialize_message(msg) 
-                for msg in request.session.get('session_AItutor_history', [])
+                for msg in last_two_messages
             ]
             # print(stored_messages)
             
@@ -357,23 +358,18 @@ class AItutor(View):
             initial_messages = [
                 SystemMessage(content=system_message),
                 *stored_messages,
-                HumanMessage(content=user_message)
+               
             ]
             
             # Invoke graph
             agent_state = {"messages": initial_messages}
+        
             LLM_response = graph.invoke(agent_state)
             
-            # Get only new messages
-            new_messages = LLM_response["messages"][len(initial_messages):]
+            
+            # # Get only new messages
+            new_messages = LLM_response["messages"]
          
-            
-            
-            # Serialize and store full history
-            request.session['session_AItutor_history'] = [
-                serialize_message(msg) 
-                for msg in initial_messages[1:] + new_messages  
-            ][-10:]  
             
             # Get final response
             final_response = new_messages[-1].content

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Delete word via AJAX
     function deleteWord(word, element) {
-        fetch("/userdata/removesavedvocabulary/", {
+        fetch("/userdata/remove-saved-vocabulary/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // View word details
     function viewWordDetails(word) {
-        fetch("/userdata/savedworddetail/", {
+        fetch("/userdata/saved-word-detail/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

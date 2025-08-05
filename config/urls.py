@@ -8,6 +8,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('apps.core.urls') ),
     path('userdata/', include('apps.user_data.urls') ),
-    path('aifeature/', include('apps.ai_assistant.urls') ),
+    path('ai-feature/', include('apps.ai_assistant.urls') ),
     path('ckeditor5/', include('django_ckeditor_5.urls')),  # 👈 Add this
 ]

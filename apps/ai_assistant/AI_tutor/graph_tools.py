@@ -19,20 +19,21 @@ load_dotenv()
 os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
 
 model = ChatGroq(model="llama3-70b-8192")
+from enum import Enum
 
-VALID_GRAMMAR_TOPICS = Literal[
-    "Conditional Sentences",
-    "Use of IT",
-    "Passive Voice",
-    "Causative Verbs",
-    "Have to / Need – Compulsory Actions",
-    "Modals",
-    "Present Tense",
-    "Simple Sentence – Part 1",
-    "Past Tense",
-    "Simple Sentence – Part 2",
-    "Future Tense"
-]
+class GrammarTopics(str, Enum):
+    CONDITIONAL_SENTENCES = "Conditional Sentences"
+    USE_OF_IT = "Use of IT"
+    PASSIVE_VOICE = "Passive Voice"
+    CAUSATIVE_VERBS = "Causative Verbs"
+    HAVE_TO = "Have to / Need - Compulsory Actions"
+    MODALS = "Modals"
+    PRESENT_TENSE = "Present Tense"
+    SIMPLE_1 = "Simple Sentence - Part 1"
+    SIMPLE_2 = "Simple Sentence - Part 2"
+    PAST_TENSE = "Past Tense"
+    FUTURE_TENSE = "Future Tense"
+
 
 
 
@@ -101,17 +102,16 @@ def retriever_vector_user_query_documents_for_englsihspeaking(query: str) -> str
 
 
 class GrammarTopicInput(BaseModel):
-    topic_name:VALID_GRAMMAR_TOPICS  = Field(
+    topic_name:GrammarTopics  = Field(
             description="Must be exact, e.g.: 'Simple Sentence Part 1' (for is/am/are) or 'Simple Sentence Part 2' (for has/have/had)",
-            examples=["Simple Sentence Part 1", "Simple Sentence Part 2"]
+            
     )
-def grammar(topic_name:VALID_GRAMMAR_TOPICS) -> str:
-     """Fetch grammar notes. Topics:
-      - 'Simple Sentence Part 1': Being verbs (is/am/are/was/were/will be)
-      - 'Simple Sentence Part 2': Possession verbs (has/have/had/will have)
-     """
+def grammar(topic_name:GrammarTopics) -> str:
+     print(f"[grammar tool called] topic_name={topic_name}")
+   
+    
      try:
-        topic = GrammarLesson.objects.get(title=topic_name)
+        topic = GrammarLesson.objects.get(title=topic_name.value)
 
         return topic.main_content
      except GrammarLesson.DoesNotExist:

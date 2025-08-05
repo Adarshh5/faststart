@@ -13,11 +13,14 @@ from langgraph.graph import END, StateGraph, START
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_groq import ChatGroq
 from .graph_tools import tools
-from .graph_tools import VALID_GRAMMAR_TOPICS
+from langchain_openai import ChatOpenAI
+os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
+os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
+
 
 def agent(state):
     messages = state['messages']
-    model = ChatGroq(model="llama3-8b-8192")
+    model = ChatOpenAI(model="gpt-4.1-mini")
     model = model.bind_tools(tools)
     response = model.invoke(messages)
     

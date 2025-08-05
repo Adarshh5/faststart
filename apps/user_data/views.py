@@ -78,7 +78,7 @@ def saveuserdefinition(request):
             messages.error(request, "Invalid form: " + str(form.errors))
         word = form.cleaned_data['word']
         obj = Vocabulary.objects.get(word_name=word)
-        return redirect(f"/word_detail/{obj.id}")
+        return redirect(f"/word-detail/{obj.id}")
     
     
 
@@ -97,7 +97,7 @@ def deleteuserdefinition(request):
             messages.error(request, "Definition not found.")
 
         obj = Vocabulary.objects.get(word_name=word)
-        return redirect(f"/word_detail/{obj.id}")
+        return redirect(f"/word-detail/{obj.id}")
 
 
 
