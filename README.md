@@ -1,6 +1,8 @@
+<<<<<<< HEAD
 # 🚀 Faststart
 
 **Faststart** is an AI-powered English speaking web app designed for learners from **beginner to advanced** levels. It provides an immersive language experience without diving deep into complex grammar, making spoken English accessible and intuitive.
+=======
 
 ---
 
@@ -33,5 +35,8 @@ Whether you're just starting out or refining your fluency, faststart grows with 
 
 
 
+
+=======
+Link -> https://faststart.in/
 
 
