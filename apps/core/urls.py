@@ -10,7 +10,7 @@ urlpatterns = [
     path('word-detail/<int:pk>/', views.WordDetail.as_view(), name='word_detail'),
     path('grammar-topics/', views.grammartopics, name='grammar-topics'),
     path('check-chat-validation/',views.checkchatvalidation, name='checkchatvalidation'),
-    path('Listning/', views.Listning, name ='Listning'),
+    path('listning/', views.Listning, name ='Listning'),
    
    
 ]

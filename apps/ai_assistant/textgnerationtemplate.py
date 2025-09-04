@@ -36,7 +36,7 @@ chat_prompt = ChatPromptTemplate.from_messages([
 
 
 llm = ChatGroq(
-   model="llama3-70b-8192"  
+   model="llama-3.3-70b-versatile"
 )
 
 
@@ -74,7 +74,7 @@ chat_prompt = ChatPromptTemplate.from_messages([
 
 
 llm = ChatGroq(
-    model="llama3-70b-8192"  # ✅ replace with exact name used in Groq if different
+    model="llama-3.3-70b-versatile"  # ✅ replace with exact name used in Groq if different
 )
 
 parser = StrOutputParser()
@@ -90,7 +90,7 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 load_dotenv()
 
-llm=ChatGroq(model='llama3-70b-8192')
+llm=ChatGroq(model="llama-3.3-70b-versatile")
 
 
 

@@ -166,7 +166,7 @@ def password_reset_view(request):
                 token = default_token_generator.make_token(user)
                 reset_url = reverse('password_reset_confirm', kwargs={'uidb64': uidb64, 'token': token})
                 absolute_reset_url = f"{request.build_absolute_uri(reset_url)}"
-                print(absolute_reset_url)
+               
                 send_reset_password_email(user.email, absolute_reset_url)
                 messages.success(request, (
                     "We have sent you a password reset link. please check your email"
