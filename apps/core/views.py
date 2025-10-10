@@ -137,17 +137,7 @@ class WordDetail(View):
 
 @login_required
 def checkchatvalidation(request):
-    user = request.user
-    # Free tier logic
-    start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
-    days_used = (timezone.now() - start_record.start_date).days
-    if days_used >= 10:
-        messages.info(request, "Your free tier has expired.")
-        return redirect('home')
-
-   
   
-
     return redirect('Chatbot')
 
  

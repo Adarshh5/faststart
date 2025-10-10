@@ -2,9 +2,9 @@
 from langchain_groq import ChatGroq
 from langchain.prompts.chat import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_core.output_parsers import StrOutputParser 
-from langchain_openai import ChatOpenAI
+
 from dotenv import load_dotenv
-from langchain_ollama import OllamaLLM
+
 
 
 load_dotenv()
@@ -33,6 +33,8 @@ chat_prompt = ChatPromptTemplate.from_messages([
     SystemMessagePromptTemplate.from_template(system_template),
     HumanMessagePromptTemplate.from_template(human_template)
 ])
+
+
 
 
 llm = ChatGroq(
@@ -77,6 +79,7 @@ llm = ChatGroq(
     model="llama-3.3-70b-versatile"  # ✅ replace with exact name used in Groq if different
 )
 
+
 parser = StrOutputParser()
 inputwithoutgrammar = chat_prompt | llm | parser
 
@@ -88,9 +91,7 @@ inputwithoutgrammar = chat_prompt | llm | parser
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 
-load_dotenv()
-
-llm=ChatGroq(model="llama-3.3-70b-versatile")
+# llm=ChatGroq(model="llama-3.3-70b-versatile")
 
 
 

@@ -26,6 +26,7 @@ from .AI_tutor.Agentic import system_message, AgentState, graph
 from .AI_tutor.message_convert import serialize_message, deserialize_message
 from dotenv import load_dotenv
 import os
+from django.db import IntegrityError, transaction
 load_dotenv()
 
 
@@ -206,12 +207,13 @@ class Chatbot(View):
         user = request.user
       
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
-      
-        days_used = (timezone.now() - start_record.start_date).days
+
+        # days_used = (timezone.now() - start_record.start_date).days
+
        
-        if days_used >= 10:
-            messages.info(request, "Your free tier has expired.")
-            return redirect('home')
+        # if days_used >= 30:
+        #     messages.info(request, "Your free tier has expired.")
+        #     return redirect('home')
         if 'session_chat_history' not in request.session:
             request.session['session_chat_history'] = []
 
@@ -241,9 +243,24 @@ class Chatbot(View):
             if not user_message:
                 return JsonResponse({'error': 'No message provided.'})
 
-            today = timezone.now().date()
+            # today = timezone.now().date()
           
-            message_usage, _ = UserDailyMessageUsage.objects.get_or_create(user=user, date=today)
+            # message_usage, _ = UserDailyMessageUsage.objects.get_or_create(user=user, date=today)
+            today = timezone.now().date()
+     
+            try:
+                with transaction.atomic():
+                    message_usage, created = UserDailyMessageUsage.objects.get_or_create(
+                        user=user,
+                        date=today,
+                        defaults={"message_count": 0}
+                    )
+            except IntegrityError:
+                message_usage = UserDailyMessageUsage.objects.get(user=user, date=today)
+                
+            
+
+
           
             if message_usage.message_count >= int(os.environ["Message_limit"]):
                 return JsonResponse({'reply': "⛔ You have sent 20 messages. Limit reached!"})
@@ -313,7 +330,7 @@ class AItutor(View):
         user = request.user
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
         days_used = (timezone.now() - start_record.start_date).days
-        if days_used >= 10:
+        if days_used >= 30:
             messages.info(request, "Your free tier has expired.")
             return redirect('home')
 

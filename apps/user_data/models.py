@@ -123,7 +123,7 @@ class UserFreeTierStart(models.Model):
 
 class UserDailyStoryUsage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)  # Updated each day
+    date = models.DateField()  # Updated each day
     count = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -135,7 +135,7 @@ class UserDailyStoryUsage(models.Model):
 
 class UserDailyMessageUsage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     message_count = models.PositiveIntegerField(default=0)
 
     class Meta:
