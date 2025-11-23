@@ -89,14 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
               return;
           }
 
-          if (!message) return;
-
-          if (currentMessageCount >= 20) {
-              showAlert("⛔ You have reached your message limit (20 messages)");
-              return;
-          }
-
-          // Disable input while waiting for response
+        
           isWaitingForResponse = true;
           userInput.disabled = true;
           const sendButton = chatForm.querySelector('button[type="submit"]');

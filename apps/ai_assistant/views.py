@@ -6,7 +6,7 @@ from .forms import UserContentStylingForm
 from django.views import View
 from django.http import JsonResponse
 from .textgnerationtemplate import (
-    inputwithgrammar, inputwithoutgrammar, llm,
+    inputwithgrammar, inputwithoutgrammar, big_model,small_model,
     build_chat_history, translate_to_hindi, build_chat_history_without_vocabulary)
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from django.utils import timezone
@@ -16,14 +16,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.timezone import localtime
+
 from django.http import HttpResponse
 
 from apps.core.safe_get import safe_get_or_create
 import logging
-from .AI_tutor.Agentic import system_message, AgentState, graph
-from .AI_tutor.message_convert import serialize_message, deserialize_message
+from .AI_tutor.Agentic import system_message, graph
+from .AI_tutor.message_convert import deserialize_message
 from dotenv import load_dotenv
 import os
 from django.db import IntegrityError, transaction
@@ -37,17 +36,17 @@ logger = logging.getLogger(__name__)
 def get_user_grammar_list(user):
     grammar_list = [
         "simple sentences where the subject doesn't do any work such as -> Ram is good man, raju was in school, we will/would be on the space in the future, shetal had two sister,  class 5th student don't have laptop , my friend will/would have car   ",
-        "use tense ",
-        "modal verbs: can/could/might/would, can/could/would be + obj, can/could/would have + obj, has/have to, will have to, need to"
+      
+        "modal verbs: can/could/might/would, can/could/would + be + obj, can/could/would + have + obj, has/have to, will have to, need to"
     ]
     
     usergrammar = SavedGrammar.objects.get(user=user)
     if usergrammar.causative_verb:
-        grammar_list.append("use causative verbs (make/get)")
+        grammar_list.append("causative verbs (make/get)")
     if usergrammar.voice:
-        grammar_list.append("use passive voice")
+        grammar_list.append("passive voice")
     if usergrammar.other:
-        grammar_list.append("use of 'It', 'use of Let', and conditional sentences")
+        grammar_list.append("'use of Let', and conditional sentences")
     
     return grammar_list
 
@@ -106,9 +105,7 @@ class textgeneration(View):
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
         days_used = (timezone.now() - start_record.start_date).days
 
-        if days_used >= 10:
-            messages.info(request, "Your free tier has expired.")
-            return redirect('home')
+
         vocabularyobj,_ = SavedVocabulary.objects.get_or_create(user=user)
         try:
             grammarobj = SavedGrammar.objects.filter(user=user).first()
@@ -191,7 +188,9 @@ class textgeneration(View):
 @login_required
 def textgenerationresult(request):
     llm_response = request.session.get('llm_response', None)
+   
     if llm_response:
+    
        return render(request, 'ai_assistant/textgenerationresult.html', {'llm_response':llm_response})
     else:
         return redirect('textgeneration') 
@@ -211,9 +210,7 @@ class Chatbot(View):
         # days_used = (timezone.now() - start_record.start_date).days
 
        
-        # if days_used >= 30:
-        #     messages.info(request, "Your free tier has expired.")
-        #     return redirect('home')
+     
         if 'session_chat_history' not in request.session:
             request.session['session_chat_history'] = []
 
@@ -263,7 +260,7 @@ class Chatbot(View):
 
           
             if message_usage.message_count >= int(os.environ["Message_limit"]):
-                return JsonResponse({'reply': "⛔ You have sent 20 messages. Limit reached!"})
+                return JsonResponse({'reply': "⛔ You have sent 40 messages. Limit reached!"})
 
             # Build context
             grammar_list = get_user_grammar_list(user)
@@ -284,9 +281,11 @@ class Chatbot(View):
 
             
             chat_history.append(HumanMessage(content=user_message))
-          
-          
-            response = llm.invoke(chat_history)
+         
+            if message_usage.message_count >= 20:
+                response = small_model.invoke(chat_history)
+            else:
+               response = big_model.invoke(chat_history)
 
             if isinstance(response, str):
                 ai_message = AIMessage(content=response)
@@ -329,10 +328,7 @@ class AItutor(View):
     def get(self, request):
         user = request.user
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
-        days_used = (timezone.now() - start_record.start_date).days
-        if days_used >= 30:
-            messages.info(request, "Your free tier has expired.")
-            return redirect('home')
+     
 
         request.session.setdefault('session_AItutor_history', [])
         request.session.setdefault('session_user_chat_history', [])
