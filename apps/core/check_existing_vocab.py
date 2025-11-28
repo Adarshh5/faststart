@@ -55,3 +55,37 @@ print("✅ Missing words (send to DeepSeek):")
 #     print(word)
 
 print(missing_words)
+
+
+# import os
+# import django
+# import sys
+
+# CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+# PROJECT_ROOT = os.path.dirname(os.path.dirname(CURRENT_DIR))
+# sys.path.insert(0, PROJECT_ROOT)
+
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.base")
+
+# django.setup()
+
+# from apps.core.models import Vocabulary
+
+# def renumber_vocabulary():
+#     # Fetch all vocab entries ordered in a stable way
+#     vocab_entries = Vocabulary.objects.order_by("id")
+
+#     new_number = 1
+#     updates = []
+
+#     for vocab in vocab_entries:
+#         vocab.word_number = new_number
+#         updates.append(vocab)
+#         new_number += 1
+
+#     Vocabulary.objects.bulk_update(updates, ['word_number'])
+
+#     print(f"Successfully renumbered {len(updates)} vocabulary words.")
+
+# if __name__ == "__main__":
+#     renumber_vocabulary()

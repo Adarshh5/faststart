@@ -1,144 +1,110 @@
-import django
 import os
+import django
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "faststart.settings")
-django.setup()
 
-from core.models import Vocabulary
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(CURRENT_DIR))
+sys.path.insert(0, PROJECT_ROOT)
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.base")
+
+django.setup()
+from apps.core.models import Vocabulary
 
 # Choose a default level
-DEFAULT_LEVEL = 'beginner'
-vocab_list = vocab_list = [
-   
+DEFAULT_LEVEL = 'intermediate'
+vocab_list = [
     
+    {
+        "word_number": 445,
+        "word_name": "Crucial",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "महत्वपूर्ण",
+        "definition": "Extremely important or necessary",
+        "example": "Regular practice is crucial for success in competitive exams.\nप्रतियोगी परीक्षाओं में सफलता के लिए नियमित अभ्यास महत्वपूर्ण है।"
+    },
+    {
+        "word_number": 446,
+        "word_name": "Inevitable",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "अपरिहार्य",
+        "definition": "Certain to happen; unavoidable",
+        "example": "Traffic jams are inevitable during peak hours in cities.\nशहरों में व्यस्त समय के दौरान ट्रैफिक जाम अपरिहार्य हैं।"
+    },
+    {
+        "word_number": 447,
+        "word_name": "Versatile",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "बहुमुखी",
+        "definition": "Able to do many different things well",
+        "example": "A smartphone is a versatile device for communication and learning.\nस्मार्टफोन संचार और सीखने के लिए एक बहुमुखी उपकरण है।"
+    },
+    {
+        "word_number": 448,
+        "word_name": "Robust",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "मजबूत",
+        "definition": "Strong and healthy; unlikely to fail or break",
+        "example": "We need a robust internet connection for online classes.\nऑनलाइन कक्षाओं के लिए हमें मजबूत इंटरनेट कनेक्शन की आवश्यकता है।"
+    },
+    {
+        "word_number": 449,
+        "word_name": "Subtle",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "सूक्ष्म",
+        "definition": "Not obvious or easy to notice; delicate and precise",
+        "example": "There is a subtle difference between these two words in English.\nअंग्रेजी में इन दो शब्दों के बीच सूक्ष्म अंतर है।"
+    },
+    {
+        "word_number": 450,
+        "word_name": "Trivial",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "तुच्छ",
+        "definition": "Of little value or importance",
+        "example": "Don't waste time on trivial matters during exam preparation.\nपरीक्षा की तैयारी के दौरान तुच्छ मामलों पर समय बर्बाद न करें।"
+    },
+    {
+        "word_number": 451,
+        "word_name": "Ubiquitous",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "सर्वव्यापी",
+        "definition": "Present, appearing, or found everywhere",
+        "example": "Mobile phones have become ubiquitous in modern life.\nआधुनिक जीवन में मोबाइल फोन सर्वव्यापी हो गए हैं।"
+    },
+    {
+        "word_number": 452,
+        "word_name": "Vague",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "अस्पष्ट",
+        "definition": "Not clear or definite; uncertain",
+        "example": "The teacher's instructions were vague, so I got confused.\nशिक्षक के निर्देश अस्पष्ट थे, इसलिए मैं उलझन में पड़ गया।"
+    },
+    {
+        "word_number": 453,
+        "word_name": "Wary",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "सतर्क",
+        "definition": "Feeling or showing caution about possible dangers or problems",
+        "example": "Be wary of strangers offering too much help.\nबहुत अधिक मदद की पेशकश करने वाले अजनबियों से सतर्क रहें।"
+    },
+    {
+        "word_number": 454,
+        "word_name": "Zealous",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "उत्साही",
+        "definition": "Showing great energy or enthusiasm for a cause",
+        "example": "The zealous volunteers cleaned the entire park.\nउत्साही स्वयंसेवकों ने पूरा पार्क साफ किया।"
+    },
+    {
+        "word_number": 455,
+        "word_name": "Ambiguous",
+        "part_of_speech": "adjective",
+        "hindi_meaning": "अस्पष्ट",
+        "definition": "Having more than one possible meaning; unclear",
+        "example": "The question was ambiguous, so students answered differently.\nप्रश्न अस्पष्ट था, इसलिए छात्रों ने अलग-अलग उत्तर दिए।"
+    },
+   
 
-   
- 
-   
-   
-    {
-        "word_number": 351,
-        "word_name": "anybody",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कोई भी व्यक्ति",
-        "definition": "Any person, it doesn't matter who",
-        "example": "Does anybody here know how to fix this printer?\nक्या यहाँ कोई भी व्यक्ति जानता है कि इस प्रिंटर को कैसे ठीक करें?",
-    },
-    {
-        "word_number": 352,
-        "word_name": "anyone",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कोई भी",
-        "definition": "Used to refer to any person, without specifying",
-        "example": "Anyone can learn to cook with practice.\nकोई भी अभ्यास से खाना बनाना सीख सकता है।",
-    },
-    {
-        "word_number": 353,
-        "word_name": "anything",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कुछ भी",
-        "definition": "Used to refer to a thing, no matter what",
-        "example": "You can ask me anything about computers.\nतुम मुझसे कंप्यूटर्स के बारे में कुछ भी पूछ सकते हो।",
-    },
-    
- 
-    {
-        "word_number": 359,
-        "word_name": "nothing",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कुछ नहीं",
-        "definition": "Not anything; no single thing",
-        "example": "There's nothing in the fridge - we need to go shopping.\nफ्रिज में कुछ नहीं है - हमें खरीदारी करने जाना होगा।",
-    },
-    {
-        "word_number": 360,
-        "word_name": "everybody",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "हर कोई",
-        "definition": "Every person",
-        "example": "Everybody must show their ID card to enter the office.\nहर कोई को कार्यालय में प्रवेश करने के लिए अपना आईडी कार्ड दिखाना होगा।",
-    },
-    {
-        "word_number": 361,
-        "word_name": "everyone",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "सभी लोग",
-        "definition": "Every person (same as 'everybody' but more formal)",
-        "example": "Everyone stood up when the principal entered the hall.\nसभी लोग खड़े हो गए जब प्रधानाचार्य हॉल में आए।",
-    },
-    {
-        "word_number": 362,
-        "word_name": "everything",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "सब कुछ",
-        "definition": "All things; all the things of a group or class",
-        "example": "She packed everything she needed for the trip.\nउसने यात्रा के लिए आवश्यक सब कुछ पैक कर लिया।",
-    },
-    {
-        "word_number": 363,
-        "word_name": "none",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कोई नहीं",
-        "definition": "Not any of a group or class",
-        "example": "None of the students failed the final exam this year.\nइस वर्ष परीक्षा में छात्रों में से कोई भी फेल नहीं हुआ।",
-    },
-    {
-        "word_number": 364,
-        "word_name": "ones",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "वे (सामान्य बहुवचन)",
-        "definition": "Used to refer to unspecified people or things",
-        "example": "The red saris are beautiful, but I prefer the blue ones.\nलाल साड़ियाँ सुंदर हैं, लेकिन मुझे नीली वाली पसंद हैं।",
-    },
-    {
-        "word_number": 365,
-        "word_name": "few",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कुछ (सीमित संख्या)",
-        "definition": "A small number of people or things",
-        "example": "Few understand how difficult farming really is.\nकुछ ही लोग समझते हैं कि खेती वास्तव में कितनी कठिन है।",
-    },
-    {
-        "word_number": 366,
-        "word_name": "many",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "बहुत से",
-        "definition": "A large number of people or things",
-        "example": "Many have tried to climb Mount Everest without success.\nबहुत से लोगों ने माउंट एवरेस्ट पर चढ़ने की असफल कोशिश की है।",
-    },
-    {
-        "word_number": 367,
-        "word_name": "several",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कई",
-        "definition": "More than two but not many",
-        "example": "Several of my classmates are going on the school trip.\nमेरे कई सहपाठी स्कूल यात्रा पर जा रहे हैं।",
-    },
-    {
-        "word_number": 368,
-        "word_name": "each other",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "एक दूसरे",
-        "definition": "Used to show that each member does something to the other(s)",
-        "example": "The two sisters help each other with homework every day.\nदोनों बहनें हर दिन एक दूसरे की गृहकार्य में मदद करती हैं।",
-    },
-    {
-        "word_number": 369,
-        "word_name": "one's",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "अपना",
-        "definition": "Belonging to or associated with one",
-        "example": "One should always do one's best in everything.\nहर किसी को हर काम में अपना सर्वश्रेष्ठ देना चाहिए।",
-    },
-    {
-        "word_number": 370,
-        "word_name": "somewhat",
-        "part_of_speech": "pronoun",
-        "hindi_meaning": "कुछ हद तक",
-        "definition": "To a moderate extent or degree",
-        "example": "I was somewhat surprised by the test results.\nमैं परीक्षा परिणामों से कुछ हद तक आश्चर्यचकित था।",
-    },
 ]
 objects = []
 

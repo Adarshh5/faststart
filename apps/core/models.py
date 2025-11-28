@@ -57,7 +57,7 @@ LEVEL = [
 ]
 
 class Vocabulary(models.Model):
-    word_number = models.PositiveIntegerField(unique=True)
+    word_number = models.PositiveIntegerField()
     word_name = models.CharField(max_length=100, unique=True)
     part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20)
     hindi_meaning = models.CharField(max_length=255, blank=True, null=True)
