@@ -138,6 +138,7 @@ class textgeneration(View):
     
     def post(self, request):
         user = request.user
+        today = timezone.now().date()
         story_usage, _ = UserDailyStoryUsage.objects.get_or_create(user=user, date=today)
         if story_usage.count >= 2:
             messages.info(request, "You’ve reached today’s story generation limit.")

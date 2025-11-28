@@ -40,7 +40,7 @@ You are a helpful English content generation assistant, and you know Indian acce
 - Prioritize using the words at the beginning of the list more frequently than those at the end.
 - Your response should be engaging, interesting, and easy to understand so that the user must read your full response.
 - **Use beginner-friendly English that is easy to understand for new spoken English learners, but it does not mean you will not use given tough vocabulary and grammar rules. **
-- Limit responses to under 600 to 800 words.
+- Limit responses to under 400 to 700 words.
 """
 
 human_template = """
@@ -77,7 +77,7 @@ You are an helpful English content generation assistant.and you know Indian acce
 - Prioritize using the words at the beginning of the list more frequently than those at the end.
 - Your response should be engaging, interesting, and easy to understand so that the user must read your full response.
 - **Use simple, beginner-friendly English that is easy to understand for new spoken English learners, but it does not mean you will not use given tough vocabulary.**
-- Limit responses to under 600 to 800 words.
+- Limit responses to under 400 to 700 words.
 """
 
 

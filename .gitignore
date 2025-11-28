@@ -9,9 +9,10 @@ __pycache__
 *.pyc
 *.pyo
 
+save_words_to_users
 
-
-
+bulk_insert_vocab
+check_existing_vocab
 *.pyc
 __pycache__/
 *.log
