@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const chatForm = document.getElementById("chatForm");
       const userInput = document.getElementById("userInput");
       const speakBtn = document.getElementById("speakBtn");
-      const messageCount = document.getElementById("messageCount");
+    //   const messageCount = document.getElementById("messageCount");
       const typingIndicator = document.getElementById("typingIndicator");
-      let currentMessageCount = 0;
+    //   let currentMessageCount = 0;
       let recognition;
       let isListening = false;
       let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
         this.style.height = Math.min(this.scrollHeight, 72) + "px"; // 72px ~ 3 lines
       });
 
-      // Initialize message count
-      if (messageCount) {
-          currentMessageCount = parseInt('{{ user_chat_timing.count|default:0 }}') || 0;
-          updateMessageCount();
-      }
+    //   // Initialize message count
+    //   if (messageCount) {
+    //       currentMessageCount = parseInt('{{ user_chat_timing.count|default:0 }}') || 0;
+    //       updateMessageCount();
+    //   }
 
       // Initialize speech recognition if available
       if ('webkitSpeechRecognition' in window) {
@@ -103,8 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
           appendMessage("user", message);
           userInput.value = "";
-          currentMessageCount++;
-          updateMessageCount();
+        //   currentMessageCount++;
+        //   updateMessageCount();
           scrollToBottom();
 
           const fetchUrl = chatForm.dataset.url;
@@ -166,21 +166,21 @@ document.addEventListener("DOMContentLoaded", function () {
           scrollToBottom();
       }
 
-      // Update message counter
-      function updateMessageCount() {
-          if (!messageCount) return;
-          messageCount.textContent = `${currentMessageCount}/20`;
+    //   // Update message counter
+    //   function updateMessageCount() {
+    //       if (!messageCount) return;
+    //       messageCount.textContent = `${currentMessageCount}/20`;
           
-          // Update data attribute for styling
-          messageCount.parentElement.setAttribute('data-count', currentMessageCount);
+    //       // Update data attribute for styling
+    //       messageCount.parentElement.setAttribute('data-count', currentMessageCount);
           
-          // Change color when approaching limit
-          if (currentMessageCount >= 16) {
-              messageCount.style.color = "#ff6b6b";
-          } else {
-              messageCount.style.color = "inherit";
-          }
-      }
+    //       // Change color when approaching limit
+    //       if (currentMessageCount >= 16) {
+    //           messageCount.style.color = "#ff6b6b";
+    //       } else {
+    //           messageCount.style.color = "inherit";
+    //       }
+    //   }
 
       function speakText(text) {
           if ('speechSynthesis' in window) {

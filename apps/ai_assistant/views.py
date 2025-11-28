@@ -6,7 +6,7 @@ from .forms import UserContentStylingForm
 from django.views import View
 from django.http import JsonResponse
 from .textgnerationtemplate import (
-    inputwithgrammar, inputwithoutgrammar, big_model,small_model,
+    inputwithgrammar, inputwithoutgrammar, openai_model, groq_model,
     build_chat_history, translate_to_hindi, build_chat_history_without_vocabulary)
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from django.utils import timezone
@@ -138,6 +138,10 @@ class textgeneration(View):
     
     def post(self, request):
         user = request.user
+        story_usage, _ = UserDailyStoryUsage.objects.get_or_create(user=user, date=today)
+        if story_usage.count >= 2:
+            messages.info(request, "You’ve reached today’s story generation limit.")
+            return redirect('home')
         form1 = UserContentStylingForm(request.POST)
         context = {
             'form1': form1,
@@ -236,13 +240,12 @@ class Chatbot(View):
             user = request.user
             data = json.loads(request.body)
             user_message = data.get('user_message')
+           
 
             if not user_message:
                 return JsonResponse({'error': 'No message provided.'})
 
-            # today = timezone.now().date()
           
-            # message_usage, _ = UserDailyMessageUsage.objects.get_or_create(user=user, date=today)
             today = timezone.now().date()
      
             try:
@@ -281,11 +284,10 @@ class Chatbot(View):
 
             
             chat_history.append(HumanMessage(content=user_message))
-         
-            if message_usage.message_count >= 20:
-                response = small_model.invoke(chat_history)
-            else:
-               response = big_model.invoke(chat_history)
+            if message_usage.message_count < 20:
+                response = openai_model.invoke(chat_history)
+            else :
+                response = groq_model.invoke(chat_history)
 
             if isinstance(response, str):
                 ai_message = AIMessage(content=response)

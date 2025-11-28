@@ -5,7 +5,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
-
+from langchain_openai import ChatOpenAI
 
 
 from dotenv import load_dotenv
@@ -22,24 +22,21 @@ load_dotenv()
 
 
 
-big_model = ChatGroq(
-    model="moonshotai/kimi-k2-instruct",
-    max_tokens=200,
-   
-)
-small_model =  ChatGroq(
+
+groq_model =  ChatGroq(
     model="llama-3.1-8b-instant",
     max_tokens=600,
    
 )
+openai_model = ChatOpenAI(model="gpt-4.1-mini")
 
 system_template = """
 You are a helpful English content generation assistant, and you know Indian accent very well:
 
 - ONLY output the final story, article, or response. DO NOT include any internal thoughts, planning, or commentary and any other content.
-- Use these grammar rules where possible in your response: {grammar_instructions}.
-- Use the following vocabulary words where posssible in your response: {vocabulary_list}.
-- User wants to learn vocabulary and grammar rules by seeing them in real context. So your main goal is to use the given grammar and vocabulary where possible.
+- Try to use these grammar rules where possible in your response: {grammar_instructions}.
+- Try to use the following vocabulary words where posssible in your response: {vocabulary_list}.
+- User wants to learn vocabulary and grammar rules by seeing them in real context. 
 - Prioritize using the words at the beginning of the list more frequently than those at the end.
 - Your response should be engaging, interesting, and easy to understand so that the user must read your full response.
 - **Use beginner-friendly English that is easy to understand for new spoken English learners, but it does not mean you will not use given tough vocabulary and grammar rules. **
@@ -56,12 +53,13 @@ chat_prompt = ChatPromptTemplate.from_messages([
 ])
 
 
+llm = ChatOpenAI(model="gpt-4.1-mini")
+# llm =  ChatGroq(
+#     model="llama-3.1-8b-instant",
+#     max_tokens=600,
+   
+# )
 
-
-llm = ChatGroq(
-   model="openai/gpt-oss-120b",
-   max_tokens=2500,
-)
 
 parser = StrOutputParser()
 inputwithgrammar = chat_prompt | llm | parser
@@ -74,8 +72,8 @@ system_template = """
 You are an helpful English content generation assistant.and you know Indian accent very well.
 
 - ONLY output the final story, article, or response. DO NOT include any internal thoughts, planning, or commentary.
-- Use the following vocabulary words where possible in your response: {vocabulary_list}.
-- User wants to learn vocabulary and by seeing them in real context. So your main goal is to use the given vocabulary where possible.
+- Try to use the following vocabulary words where possible in your response: {vocabulary_list}.
+- User wants to learn vocabulary and by seeing them in real context.
 - Prioritize using the words at the beginning of the list more frequently than those at the end.
 - Your response should be engaging, interesting, and easy to understand so that the user must read your full response.
 - **Use simple, beginner-friendly English that is easy to understand for new spoken English learners, but it does not mean you will not use given tough vocabulary.**
@@ -145,7 +143,7 @@ def build_chat_history_without_vocabulary(request):
 def build_chat_history(request, grammar_string, vocab_string):
     system_msg = SystemMessage(content=f"""You are a helpful English speaker with an Indian accent. Speak only in English always be friendly.
 
-- Use the given grammar rules: {grammar_string}, and vocabulary words: {vocab_string}. (Vocabulary list ends here.)
+- Try to use the given grammar rules: {grammar_string}, and vocabulary words: {vocab_string}. (Vocabulary list ends here.)
   where possible. Make sure they sound natural and fit the flow of the conversation.
 - Prioritize the top-listed vocabulary words.
 - Focus on making conversations engaging, clear, and relevant so users enjoy chatting longer.

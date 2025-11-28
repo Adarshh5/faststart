@@ -1,25 +1,40 @@
 import os
 import django
-
-# SETUP DJANGO
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'faststart.settings')
-django.setup()
 
-from core.models import Vocabulary
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(CURRENT_DIR))
+sys.path.insert(0, PROJECT_ROOT)
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.base")
+
+django.setup()   # <-- MUST come before model imports
+
+from apps.core.models import Vocabulary   # now safe
 
 # Your input word list (you can replace this each time)
-input_words =[
-    "fancy", "fare", "uneasy", "gasp", "gather", "lap", "lash", "harbour",
-    "deaf", "deal", "rapid", "warm", "bank", "bar", "lazy", "legal", "loud",
-    "lucky", "meaningful", "imagine", "wake up", "walk out", "wear out",
-    "watch out", "warm up", "write down", "check later", "come early",
-    "do your best", "go for it", "have to", "just kidding", "no way", 
-    "not really", "on hold", "long time", "in touch"
+input_words = [
+    "Articulate", "Procrastinate", "Delegate", "Facilitate", "Alleviate",
+    "Speculate", "Compensate", "Negotiate", "Initiate", "Terminate",
+    "Comprehend", "Elaborate", "Anticipate", "Tolerate", "Amplify",
+    "Deteriorate", "Rejuvenate", "Manipulate", "Validate", "Imitate",
+    "Contemplate", "Venture", "Ascertain", "Refrain", "Perceive",
+    "Dilemma", "Priority", "Consensus", "Perks", "Incentive",
+    "Accountability", "Autonomy", "Burnout", "Deadline", "Mindset",
+    "Nuance", "Setback", "Stakeholder", "Threshold", "Verification",
+    "Aftermath", "Bottleneck", "Conscience", "Ethics", "Criteria",
+    "Insight", "Morale", "Obligation", "Protocol", "Sanction",
+    "Tedious", "Feasible", "Crucial", "Inevitable", "Versatile",
+    "Robust", "Subtle", "Trivial", "Ubiquitous", "Vague", "Wary",
+    "Zealous", "Ambiguous", "Comprehensive", "Consecutive", "Deficient",
+    "Eccentric", "Formidable", "Gregarious", "Hectic", "Indispensable",
+    "Jeopardy", "Lucid", "Meticulous", "Notorious", "Accordingly",
+    "Consequently", "Conversely", "Ultimately", "Virtually", "Hence",
+    "Nonetheless", "Thereby", "Whereas"
 ]
+
+
 
 
 existing_words = set()
