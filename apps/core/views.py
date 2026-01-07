@@ -73,17 +73,18 @@ def grammartopics(request):
 def vocabulary(request):
     number = request.GET.get('number')
     vocabulary_list = []
-    if number:
-        try:
-            number = int(number)  # convert to int
-            vocabulary_list = Vocabulary.objects.filter(
-                word_number__gte=number,
-                word_number__lte=number + 100
-            )
-        except ValueError:
-            vocabulary_list = Vocabulary.objects.none()  # if number is not valid int
-    else:
-        vocabulary_list = Vocabulary.objects.filter(word_number__lte=100)
+    try:
+        start = int(number) if number else 1
+    except ValueError:
+        start = 1
+
+    end = start + 99
+
+    vocabulary_list = (
+        Vocabulary.objects
+        .filter(word_number__gte=start, word_number__lte=end)
+        .order_by('word_number')
+    )
 
     form = NumberInputForm()
     return render(request, 'core/vocabulary.html', {

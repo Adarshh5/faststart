@@ -14,26 +14,34 @@ django.setup()   # <-- MUST come before model imports
 from apps.core.models import Vocabulary   # now safe
 
 # Your input word list (you can replace this each time)
-input_words = [
-    "Articulate", "Procrastinate", "Delegate", "Facilitate", "Alleviate",
-    "Speculate", "Compensate", "Negotiate", "Initiate", "Terminate",
-    "Comprehend", "Elaborate", "Anticipate", "Tolerate", "Amplify",
-    "Deteriorate", "Rejuvenate", "Manipulate", "Validate", "Imitate",
-    "Contemplate", "Venture", "Ascertain", "Refrain", "Perceive",
-    "Dilemma", "Priority", "Consensus", "Perks", "Incentive",
-    "Accountability", "Autonomy", "Burnout", "Deadline", "Mindset",
-    "Nuance", "Setback", "Stakeholder", "Threshold", "Verification",
-    "Aftermath", "Bottleneck", "Conscience", "Ethics", "Criteria",
-    "Insight", "Morale", "Obligation", "Protocol", "Sanction",
-    "Tedious", "Feasible", "Crucial", "Inevitable", "Versatile",
-    "Robust", "Subtle", "Trivial", "Ubiquitous", "Vague", "Wary",
-    "Zealous", "Ambiguous", "Comprehensive", "Consecutive", "Deficient",
-    "Eccentric", "Formidable", "Gregarious", "Hectic", "Indispensable",
-    "Jeopardy", "Lucid", "Meticulous", "Notorious", "Accordingly",
-    "Consequently", "Conversely", "Ultimately", "Virtually", "Hence",
-    "Nonetheless", "Thereby", "Whereas"
+input_words =[
+    "Integrity", "Accelerate", "Break through", "Empathy", "Allocate", "Monitor", "Apparent",
+    "Carry out", "Hypothesis", "Cultivate", "Slip up", "Advocate", "Constraint", "Get ahead",
+    "Dramatically", "Abstract", "Implement", "Manipulate", "Drawback", "Engage", "Narrow down",
+    "Come across", "Evaluate", "Face up to", "Bias", "Interpret", "Break into", "Adequate",
+    "Go along with", "Manifestation", "Deduce", "Sort out", "Controversy", "Minimize",
+    "Attribute", "Distort", "Catch on", "Jurisdiction", "Analyze", "Establish", "Wear off",
+    "Motivation", "Generate", "Follow through", "Rely on", "Integrate", "Commodity",
+    "Explicitly", "Back down", "Invoke", "Dimension", "Actively", "Estimate", "Put forward",
+    "Convey", "Derive", "Come about", "Stand out", "Inhibit", "Facilitate", "Dominate",
+    "Hand over", "Contribute", "Compatible", "Fall through", "Credible", "Allocate",
+    "Justify", "Disrupt", "Work out", "Set aside", "Extract", "Innovation", "Assertive",
+    "Emphasize", "Framework", "Get over", "Exploit", "Designate", "Compile", "Constraint",
+    "Execute", "Exclude", "Depict", "Adapt", "Assert", "Team up", "Clarify", "Write off",
+    "Adversity", "Intervention", "Take over", "Demonstrate", "Fluctuate", "Run into",
+    "Clarify", "Coordinate", "Imply", "Point out", "Enhance", "Legislation", "Dismiss",
+    "Consistently", "Integrate", "Apparent", "Rule out", "Get by", "Maintain", "Influence",
+    "Detect", "Comply", "Eliminate", "Turn down", "Break down", "Expand", "Accommodate",
+    "Illustrate", "Stick to", "Induce", "Show up", "Assess", "Modify", "Correspond",
+    "Critically", "Motivate", "Draw up", "Distribute", "Clarify", "Stand by", "Exceed",
+    "Conceive", "Collaborate", "Distinction", "Come forward", "Exclude", "Sustain",
+    "Narrow down", "Come through", "Fall apart", "Hand in", "Go through", "Set forth",
+    "Integrate", "Follow up", "Evolve", "Highlight", "Ensure", "Figure out", "Manipulate",
+    "Turn up", "Assume", "Infer", "Attribute", "Iron out", "Stick to", "Come down to",
+    "Evaluate", "Generate", "Maximize", "Influence", "Put across", "Establish", "Emphasis",
+    "Sort out", "Write off", "Explicit", "Hold back", "Consistent", "Engage", "Carry on",
+    "Entirely", "Formulate", "Maintain", "Initiate", "Implement", "Integrate", "Work out"
 ]
-
 
 
 
@@ -55,6 +63,14 @@ print("✅ Missing words (send to DeepSeek):")
 #     print(word)
 
 print(missing_words)
+
+
+
+
+
+
+
+
 
 
 # import os

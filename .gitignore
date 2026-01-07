@@ -11,8 +11,8 @@ __pycache__
 
 save_words_to_users
 
-bulk_insert_vocab
-check_existing_vocab
+bulk_insert_vocab.py
+check_existing_vocab.py
 *.pyc
 __pycache__/
 *.log

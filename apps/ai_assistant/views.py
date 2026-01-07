@@ -6,11 +6,11 @@ from .forms import UserContentStylingForm
 from django.views import View
 from django.http import JsonResponse
 from .textgnerationtemplate import (
-    inputwithgrammar, inputwithoutgrammar, openai_model, groq_model,
-    build_chat_history, translate_to_hindi, build_chat_history_without_vocabulary)
+    inputwithgrammar, inputwithoutgrammar,  groq_model,
+     translate_to_hindi, build_chat_history_without_vocabulary)
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from django.utils import timezone
-from datetime import timedelta
+
 import json
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -150,12 +150,13 @@ class textgeneration(View):
         
         if form1.is_valid():
             grammar_option = form1.cleaned_data['grammar']
-            vocab_option = form1.cleaned_data['add_my_added_vocabulary']
+            # vocab_option = form1.cleaned_data['add_my_added_vocabulary']
             user_prompt = form1.cleaned_data['prompt']
             try:
            
                 grammar_list = get_user_grammar_list(user) if grammar_option == "include" else []
-                vocab_list = includevocabulary(user) if vocab_option == "include" else notincludevocabulary(user)
+                # vocab_list = includevocabulary(user) if vocab_option == "include" else notincludevocabulary(user)
+                vocab_list = notincludevocabulary(user)
                
                 grammar_string = ", ".join(grammar_list) if isinstance(grammar_list, list) else ""
                 vocab_string = ", ".join(vocab_list) if isinstance(vocab_list, list) else ""
@@ -172,7 +173,7 @@ class textgeneration(View):
                         "vocabulary_list": vocab_string,
                         "user_prompt": user_prompt
                     })
-                today = timezone.now().date()
+              
                 countobj, _ = safe_get_or_create(UserDailyStoryUsage, user=user, date=today)
                 countobj.count+=1
                 countobj.save()
@@ -213,23 +214,11 @@ class Chatbot(View):
         start_record, _ = UserFreeTierStart.objects.get_or_create(user=user)
 
         # days_used = (timezone.now() - start_record.start_date).days
-
-       
      
         if 'session_chat_history' not in request.session:
             request.session['session_chat_history'] = []
-
-        grammar_list = get_user_grammar_list(user)
-        vocab_list = notincludevocabulary(user)
-
-        if len(vocab_list) > 20:
-            _ = build_chat_history_without_vocabulary(request)
-        else:
-            grammar_string = ", ".join(grammar_list)
-            vocab_list = [w for w in vocab_list if isinstance(w, str) and w.strip()]
-            vocab_string = ", ".join(vocab_list)
-            _ = build_chat_history(request, grammar_string, vocab_string)
-
+      
+        _ = build_chat_history_without_vocabulary(request)
        
         return render(request, 'ai_assistant/chatbot.html', {
             'chat_history': request.session['session_chat_history'],
@@ -258,26 +247,14 @@ class Chatbot(View):
                     )
             except IntegrityError:
                 message_usage = UserDailyMessageUsage.objects.get(user=user, date=today)
-                
-            
-
 
           
             if message_usage.message_count >= int(os.environ["Message_limit"]):
                 return JsonResponse({'reply': "⛔ You have sent 40 messages. Limit reached!"})
 
-            # Build context
-            grammar_list = get_user_grammar_list(user)
-            vocab_list = notincludevocabulary(user)
-            
-
-            if len(vocab_list) < 20:
                  
-                  chat_history = build_chat_history_without_vocabulary(request)
-            else:
-                 grammar_string = ", ".join(grammar_list)
-                 vocab_string = ", ".join(vocab_list)
-                 chat_history = build_chat_history(request, grammar_string, vocab_string)
+            chat_history = build_chat_history_without_vocabulary(request)
+           
             
             request.session['session_chat_history'].append(
                 {'type': 'user', 'content': user_message}
@@ -285,10 +262,8 @@ class Chatbot(View):
 
             
             chat_history.append(HumanMessage(content=user_message))
-            if message_usage.message_count < 20:
-                response = openai_model.invoke(chat_history)
-            else :
-                response = groq_model.invoke(chat_history)
+          
+            response = groq_model.invoke(chat_history)
 
             if isinstance(response, str):
                 ai_message = AIMessage(content=response)

@@ -1,5 +1,4 @@
 
-from langchain.tools.retriever import create_retriever_tool
 
 import os
 from langchain_community.vectorstores import FAISS
