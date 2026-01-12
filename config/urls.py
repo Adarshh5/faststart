@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 
-from .sitemaps import StaticSitemap
+from config.sitemaps import StaticSitemap
 
 sitemaps = {
     'static': StaticSitemap,
