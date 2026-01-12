@@ -83,3 +83,61 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* Add to your existing grammar.css */
+
+/* Grammar Instruction Box */
+.grammar-instruction {
+    background: rgba(155, 248, 203, 0.08);
+    border: 1px solid var(--mint-green);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin: 0 auto 2.5rem auto;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+}
+
+.grammar-instruction::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--mint-green), var(--aquamarine));
+}
+
+.instruction-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Mobile Optimizations for Instruction Box */
+@media (max-width: 768px) {
+    .grammar-instruction {
+        padding: 1rem;
+        margin: 0 1rem 2rem 1rem;
+        border-radius: 8px;
+    }
+    
+    .instruction-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .grammar-heading {
+        padding: 0 1rem;
+    }
+}
+
+/* Tablet Optimizations */
+@media (max-width: 992px) {
+    .grammar-instruction {
+        margin: 0 1.5rem 2rem 1.5rem;
+    }
+}

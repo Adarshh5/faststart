@@ -17,14 +17,18 @@
  
 </head>
 <body class="theme-dark">
-    <div class="chat-container">
-        <!-- Chat Header -->
-        <div class="chat-header">
-            <div class="d-flex align-items-center justify-content-between">
-                <h3 class="chat-title">AI Assistant</a></h3>
-                
-            </div>
-        </div>
+    <!-- In your HTML file - modify the chat-header section -->
+<div class="chat-header">
+    <div class="d-flex align-items-center justify-content-between">
+        <h3 class="chat-title">
+            AI Assistant
+            <!-- Add a subtle home link next to the title -->
+            <a href="{% url 'home' %}" class="home-link" title="Go to Home">
+                <i class="fas fa-home ms-2"></i>
+            </a>
+        </h3>
+    </div>
+</div>
 
         <!-- Chat Messages -->
         <div id="chatBox" class="chat-box">

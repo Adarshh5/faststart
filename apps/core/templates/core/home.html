@@ -22,8 +22,33 @@
             <h2 class="section-title">Explore Learning Topics</h2>
             <p class="section-subtitle">Interactive modules designed for effective skill building</p>
         </div>
+        
+
+            
 
         <div class="topics-grid">
+            <!-- Speaking -->
+        <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">AI Speaking Partner</h3>
+                    <p class="topic-description">Practice conversations with our smart AI using simple language.</p>
+                </div>
+                <a href="{% url 'checkchatvalidation' %}" class="btn btn-topic">Start Practice</a>
+        </div>
+         <!-- Listening -->
+        <div class="topic-card">
+                <div class="topic-icon">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="topic-content">
+                    <h3 class="topic-title">Listening Resources</h3>
+                    <p class="topic-description">Be ready to understand any kind of English conversation.</p>
+                </div>
+                <a href="{% url 'Listning' %}" class="btn btn-topic">Start Learning</a>
+        </div>
             <!-- Grammar -->
             <div class="topic-card">
                 <div class="topic-icon">
@@ -60,36 +85,55 @@
                 <a href="{% url 'textgeneration' %}" class="btn btn-topic">Start Reading</a>
             </div>
 
-            <!-- Listening -->
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-headphones"></i>
-                </div>
-                <div class="topic-content">
-                    <h3 class="topic-title">Listening Resources</h3>
-                    <p class="topic-description">Be ready to understand any kind of English conversation.</p>
-                </div>
-                <a href="{% url 'Listning' %}" class="btn btn-topic">Start Learning</a>
-            </div>
-
-            <!-- Speaking -->
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="topic-content">
-                    <h3 class="topic-title">AI Speaking Partner</h3>
-                    <p class="topic-description">Practice conversations with our smart AI using simple language.</p>
-                </div>
-                <a href="{% url 'checkchatvalidation' %}" class="btn btn-topic">Start Practice</a>
-            </div>
-            
+           
+         
            
         </div>
     </div>
 </section>
-
-
+<!-- Introduction Video -->
+<section class="intro-video-section">
+    <div class="container">
+        <div class="video-header">
+            <h2>Start Your English Journey</h2>
+            <p>Watch this quick introduction to begin speaking English</p>
+        </div>
+        
+        <div class="video-player">
+            <iframe 
+                src="https://www.youtube.com/embed/9vQg85jwfXE?rel=0&modestbranding=1" 
+                title="FastStart AI Introduction" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+        </div>
+        
+        <div class="video-info">
+            <h3>How FastStart AI Works:</h3>
+            <div class="info-points">
+                <div class="info-point">
+                    <i class="fas fa-comments"></i>
+                    <span>Practice with AI Speaking Partner</span>
+                </div>
+                <div class="info-point">
+                    <i class="fas fa-headphones"></i>
+                    <span>Improve Listening with Resources</span>
+                </div>
+                <div class="info-point">
+                    <i class="fas fa-book"></i>
+                    <span>Learn Spoken Grammar & Vocabulary</span>
+                </div>
+                <div class="info-point">
+                    <i class="fas fa-brain"></i>
+                    <span>No Revision Needed - AI Uses What You Learn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- FAQ Section -->
 <section class="faq-section">
     <div class="container">

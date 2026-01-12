@@ -157,3 +157,92 @@
         max-width: 100%;
     }
 }
+
+
+
+
+
+
+
+
+
+
+/* Add to your existing vocabulary.css */
+
+/* Vocabulary Introduction Box */
+.vocab-intro {
+    background: rgba(58, 80, 107, 0.2);
+    border: 1px solid rgba(111, 255, 233, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vocab-intro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mint-green), var(--aquamarine));
+}
+
+.intro-text {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Optional: Add an icon before the text */
+.vocab-intro::after {
+    content: "📚";
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    font-size: 2rem;
+    opacity: 0.2;
+}
+
+/* Mobile Optimization for Intro Box */
+@media (max-width: 768px) {
+    .vocab-intro {
+        padding: 1.25rem;
+        margin: 0 1rem 2rem 1rem;
+        border-radius: 10px;
+    }
+    
+    .intro-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    .vocab-intro::after {
+        font-size: 1.5rem;
+        bottom: -5px;
+        right: 10px;
+    }
+}
+
+/* Tablet Optimization */
+@media (max-width: 992px) {
+    .vocab-intro {
+        margin: 0 1.5rem 2rem 1.5rem;
+    }
+}
+
+/* Desktop - Limit width for better readability */
+@media (min-width: 1200px) {
+    .vocab-intro {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
