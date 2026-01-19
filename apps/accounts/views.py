@@ -14,9 +14,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 import os
 from apps.accounts.utils import send_activation_email, send_reset_password_email
-from django.shortcuts import get_object_or_404
+
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -227,3 +228,27 @@ def terms_and_condition(request):
 
 def error_view(request):
     raise ValueError("This is a test error")
+
+
+@login_required
+def agree_terms(request):
+    """Handle the agreement submission"""
+    if request.method == 'POST':
+        user = request.user
+        user_agreement, created = UserAgreement.objects.get_or_create(
+            user=user,
+            defaults={'agreed': True}
+        )
+        
+        if not created:
+            user_agreement.agreed = True
+            user_agreement.agreed_at = timezone.now()
+            user_agreement.save()
+        
+        messages.success(request, "Thank you for agreeing to our Terms & Conditions and Privacy Policy.")
+        
+        # Redirect to the page they were trying to access or home
+        next_url = request.POST.get("next", "/")
+        return redirect(next_url)
+    
+    return render(request, 'accounts/agree_terms.html')

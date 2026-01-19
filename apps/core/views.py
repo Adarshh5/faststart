@@ -13,15 +13,15 @@ from apps.user_data.forms import UserDefinitionForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import logging
-from django.utils import timezone
-from datetime import timedelta
+
 from django.db import IntegrityError, transaction
 from .safe_get import safe_get_or_create
 from django.utils.timezone import localtime
 from django.http import HttpResponse
-
-import datetime
-
+from apps.accounts.decorators import check_agreement_required
+from apps.accounts.models import UserAgreement
+from django.utils.decorators import method_decorator
+from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 
@@ -31,8 +31,9 @@ def home(request):
     request.session.pop('session_user_chat_history', None)
     return render(request, 'core/home.html')
 
-
+@check_agreement_required
 def grammar(request):
+  
     return render(request, 'core/grammar.html')
 
 TOPIC_MAP = {
@@ -44,8 +45,9 @@ TOPIC_MAP = {
     'voice': 'Voice',
     'other': 'Other',
 }
-
+@check_agreement_required
 def grammartopics(request):
+ 
     user = request.user
     topic_key = request.GET.get('topic')
     if topic_key not in TOPIC_MAP:
@@ -69,8 +71,9 @@ def grammartopics(request):
     })
 
 
-
+@check_agreement_required
 def vocabulary(request):
+   
     number = request.GET.get('number')
     vocabulary_list = []
     try:
@@ -98,8 +101,10 @@ def vocabulary(request):
 
 
 
+@method_decorator(check_agreement_required, name='dispatch')
 class WordDetail(View):
     def get(self, request, pk):
+      
         try:
             word = get_object_or_404(Vocabulary, id=pk)
 
@@ -136,12 +141,16 @@ class WordDetail(View):
 
 
 
+
 @login_required
+@check_agreement_required
 def checkchatvalidation(request):
   
     return redirect('Chatbot')
 
  
+
 @login_required
+@check_agreement_required
 def Listning(request):
     return render(request, 'core/Listning.html')

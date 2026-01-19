@@ -1,0 +1,183 @@
+/* static/core/css/agree_terms.css */
+.agreement-container {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.agreement-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--indigo-dye);
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.agreement-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--indigo-dye);
+}
+
+.agreement-title {
+    color: var(--mint-green);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.agreement-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.agreement-content {
+    margin-bottom: 2.5rem;
+}
+
+.terms-section {
+    background: rgba(111, 255, 233, 0.08);
+    border: 1px solid rgba(111, 255, 233, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.terms-section h3 {
+    color: var(--aquamarine);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.terms-section p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.view-link {
+    color: var(--mint-green);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.view-link:hover {
+    color: var(--aquamarine);
+}
+
+.agreement-checkboxes {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+.form-check {
+    margin-bottom: 1rem;
+}
+
+.form-check-input {
+    background-color: var(--space-cadet);
+    border: 2px solid var(--indigo-dye);
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--aquamarine);
+    border-color: var(--aquamarine);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(111, 255, 233, 0.25);
+}
+
+.form-check-label {
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.agreement-form {
+    margin-top: 2rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    color: var(--text-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(142, 45, 226, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--indigo-dye);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--aquamarine);
+}
+
+.agreement-note {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 1rem 0 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .agreement-card {
+        padding: 1.5rem;
+    }
+    
+    .agreement-title {
+        font-size: 1.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .terms-section {
+        padding: 1rem;
+    }
+}

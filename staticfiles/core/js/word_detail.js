@@ -94,5 +94,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('definitionInput');
+    const submitBtn = document.getElementById('addDefinitionBtn');
 
+    if (input && submitBtn) {
+        submitBtn.disabled = true;
 
+        input.addEventListener('input', () => {
+            submitBtn.disabled = input.value.trim().length === 0;
+        });
+    }
+});
+input.form.closest('form').addEventListener('submit', () => {
+    submitBtn.disabled = true;
+});

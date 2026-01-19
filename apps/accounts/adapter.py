@@ -5,7 +5,6 @@ class NoUsernameAccountAdapter(DefaultAccountAdapter):
         return ""
 
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from allauth.exceptions import ImmediateHttpResponse
 from django.contrib.auth import get_user_model
 from allauth.account.utils import user_email
 

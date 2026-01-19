@@ -140,14 +140,7 @@ body {
     30% { transform: translateY(-5px); }
 }
 
-/* Input Area */
-.chat-input-area {
-    margin-bottom: 10px;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-top: 1px solid var(--indigo-dye);
-    flex-shrink: 0;
-}
+
 
 .input-group {
     display: flex;
@@ -307,7 +300,15 @@ body {
 }
 
 
-        
+    
+.chat-input-area {
+    margin-bottom: 10px;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--indigo-dye);
+    flex-shrink: 0;
+}
+
 /* Critical fix for mobile input visibility */
 .chat-input-area {
     position: fixed;

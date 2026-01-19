@@ -49,9 +49,9 @@
             {% else %}
                 <form method="POST" action="{% url 'add_definition' %}">
                     {% csrf_token %}
-                    <textarea name="definition" rows="5" class="form-control" maxlength="1000" placeholder="Write your own definition (max 5 lines)..."></textarea>
+                    <textarea id="definitionInput" name="definition" rows="5" class="form-control" maxlength="1000" placeholder="Write your own definition (max 5 lines)..."></textarea>
                     <input type="hidden" name="word" value="{{ word.word_name }}">
-                    <button type="submit" class="btn btn-add-def mt-3">
+                    <button id="addDefinitionBtn" type="submit" class="btn btn-add-def mt-3">
                         <i class="fas fa-plus me-2"></i>Add Definition
                     </button>
                 </form>

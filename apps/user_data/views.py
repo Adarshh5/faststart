@@ -11,9 +11,11 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+
+from apps.accounts.decorators import check_agreement_required
 
 @login_required
+@check_agreement_required
 def savegrammar(request):
     if request.method != 'POST':
         return HttpResponseBadRequest("Invalid request method.")
@@ -36,6 +38,7 @@ def savegrammar(request):
     return redirect('grammar')
 
 @login_required
+
 def saveword(request):
     if request.method == "POST":
         user = request.user
@@ -62,6 +65,7 @@ def saveword(request):
 
 
 @login_required
+@check_agreement_required
 def saveuserdefinition(request):
     if request.method == "POST":
         form = UserDefinitionForm(request.POST)
@@ -75,7 +79,7 @@ def saveuserdefinition(request):
 
             messages.success(request, "Definition saved.")
         else:
-            messages.error(request, "Invalid form: " + str(form.errors))
+            messages.error(request, "Invalid form")
         word = form.cleaned_data['word']
         obj = Vocabulary.objects.get(word_name=word)
         return redirect(f"/word-detail/{obj.id}")
@@ -83,6 +87,7 @@ def saveuserdefinition(request):
     
 
 @login_required
+@check_agreement_required
 def deleteuserdefinition(request):
     if request.method == "POST":
        
@@ -102,10 +107,12 @@ def deleteuserdefinition(request):
 
 
 @login_required
+@check_agreement_required
 def Profile(request):
     return render(request, "user_data/Profile.html")
 
 @login_required
+@check_agreement_required
 def savedVocabulary(request):
     user = request.user
     obj, created = SavedVocabulary.objects.get_or_create(user=user)
@@ -115,6 +122,7 @@ def savedVocabulary(request):
 
 @login_required
 @csrf_exempt 
+@check_agreement_required
 def removesavedvocabulary(request):
     if request.method == "POST":
         user = request.user
@@ -148,6 +156,7 @@ def removesavedvocabulary(request):
     return JsonResponse({"reply": "Invalid request method."}, status=405)
 
 @login_required
+@check_agreement_required
 def savedworddetail(request):
     if request.method == "POST":
         user = request.user

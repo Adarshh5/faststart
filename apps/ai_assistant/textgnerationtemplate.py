@@ -25,7 +25,7 @@ load_dotenv()
 
 groq_model =  ChatGroq(
     model="llama-3.1-8b-instant",
-    max_tokens=600,
+    max_tokens=400,
    
 )
 openai_model = ChatOpenAI(model="gpt-4.1-mini")
@@ -181,8 +181,9 @@ def build_chat_history(request, grammar_string, vocab_string):
 
 
 trans_llm = ChatGroq(
-   model="llama-3.1-8b-instant",
-   max_tokens=300 
+   model="openai/gpt-oss-120b",
+   max_tokens=500,
+   
 )
 
    

@@ -1,0 +1,111 @@
+<!-- templates/agree_terms.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'accounts/css/agree_terms.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="agreement-container">
+    <div class="agreement-card">
+        <!-- Header -->
+        <div class="agreement-header">
+            <h1 class="agreement-title">Welcome to FastStart AI</h1>
+            <p class="agreement-subtitle">Please accept our terms to continue</p>
+        </div>
+        
+        <!-- Agreement Content -->
+        <div class="agreement-content">
+            <div class="terms-section">
+                <h3><i class="fas fa-file-contract me-2"></i>Terms & Conditions</h3>
+                <p>By using our platform, you agree to our Terms & Conditions.</p>
+                <a href="{% url 'terms-and-condition' %}" target="_blank" class="view-link">
+                    View Full Terms <i class="fas fa-external-link-alt ms-1"></i>
+                </a>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-shield-alt me-2"></i>Privacy Policy</h3>
+                <p>Your privacy is important to us. Read how we protect your data.</p>
+                <a href="{% url 'privacy_policy' %}" target="_blank" class="view-link">
+                    View Privacy Policy <i class="fas fa-external-link-alt ms-1"></i>
+                </a>
+            </div>
+            
+            {% comment %} <!-- Checkboxes -->
+            <div class="agreement-checkboxes">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="termsCheck">
+                    <label class="form-check-label" for="termsCheck">
+                        I have read and agree to the Terms & Conditions
+                    </label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="privacyCheck">
+                    <label class="form-check-label" for="privacyCheck">
+                        I have read and agree to the Privacy Policy
+                    </label>
+                </div>
+            </div> {% endcomment %}
+        </div>
+        
+        <!-- Action Buttons -->
+        <form method="POST" action="{% url 'agree_terms' %}" class="agreement-form">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            
+            <div class="button-group">
+                <button type="submit" id="agreeButton" class="btn btn-primary" >
+                    <i class="fas fa-check me-2"></i>I Agree & Continue
+                </button>
+                
+               
+             
+                   
+                </a>
+            </div>
+            
+            <p class="agreement-note">
+                You must agree to continue using FastStart AI.
+            </p>
+        </form>
+        <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-secondary mt-2">
+        <i class="fas fa-sign-out-alt me-2"></i>Decline & Logout
+    </button>
+</form>
+    </div>
+</div>
+
+{% block extra_js %}
+{% comment %} <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const termsCheck = document.getElementById('termsCheck');
+    const privacyCheck = document.getElementById('privacyCheck');
+    const agreeButton = document.getElementById('agreeButton');
+    
+    function updateAgreeButton() {
+        agreeButton.disabled = !(termsCheck.checked && privacyCheck.checked);
+    }
+    
+    termsCheck.addEventListener('change', updateAgreeButton);
+    privacyCheck.addEventListener('change', updateAgreeButton);
+    
+    // Form submission loading state
+    const form = document.querySelector('.agreement-form');
+    form.addEventListener('submit', function(e) {
+        if (!termsCheck.checked || !privacyCheck.checked) {
+            e.preventDefault();
+            return;
+        }
+        
+        agreeButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+        agreeButton.disabled = true;
+    });
+});
+</script> {% endcomment %}
+{% endblock %}
+{% endblock %}

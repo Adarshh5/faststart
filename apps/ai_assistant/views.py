@@ -26,6 +26,8 @@ from .AI_tutor.message_convert import deserialize_message
 from dotenv import load_dotenv
 import os
 from django.db import IntegrityError, transaction
+from apps.accounts.decorators import check_agreement_required
+
 load_dotenv()
 
 
@@ -99,6 +101,7 @@ def notincludevocabulary(user):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(check_agreement_required, name='dispatch')  
 class textgeneration(View):
     def get(self, request):
         user = request.user
@@ -192,6 +195,7 @@ class textgeneration(View):
                    
 
 @login_required
+@method_decorator(check_agreement_required, name='dispatch')  # This runs second
 def textgenerationresult(request):
     llm_response = request.session.get('llm_response', None)
    
@@ -207,6 +211,7 @@ def textgenerationresult(request):
     
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(check_agreement_required, name='dispatch')  # This runs second
 class Chatbot(View):
     def get(self, request):
         user = request.user
@@ -302,6 +307,7 @@ class Chatbot(View):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(check_agreement_required, name='dispatch')  # This runs second
 class AItutor(View):
     def get(self, request):
         user = request.user
