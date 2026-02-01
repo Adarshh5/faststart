@@ -195,7 +195,7 @@ class textgeneration(View):
                    
 
 @login_required
-@method_decorator(check_agreement_required, name='dispatch')  # This runs second
+@check_agreement_required
 def textgenerationresult(request):
     llm_response = request.session.get('llm_response', None)
    

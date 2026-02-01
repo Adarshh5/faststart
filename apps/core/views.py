@@ -14,9 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import logging
 
-from django.db import IntegrityError, transaction
 from .safe_get import safe_get_or_create
-from django.utils.timezone import localtime
+
 from django.http import HttpResponse
 from apps.accounts.decorators import check_agreement_required
 from apps.accounts.models import UserAgreement
